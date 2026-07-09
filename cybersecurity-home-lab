@@ -1,4 +1,4 @@
-# Cybersecurity Home Lab Design • RAAF Cyber Warfare Officer Preparation
+# Cybersecurity Home Lab Design • Information Warfare Officer
 
 ![GitHub](https://img.shields.io/badge/Repo-Home%20Lab-blue)
 ![Focus](https://img.shields.io/badge/Focus-Defensive%20Network%20Architecture-green)
@@ -11,7 +11,7 @@
 
 ## 🎯 Project Objective & ADF Alignment
 
-This lab is a practical simulation of the exact type of protected environment a **RAAF Cyber Warfare Officer** would be responsible for defending. As stated on the official ADF Careers site, the role centres on “leading a team of technical experts responsible for protecting our networks, data and information systems”.
+This lab is a practical simulation of the exact type of protected environment a **RAAF Information Warfare Officer** would be responsible for defending. As stated on the official ADF Careers site, the role centres on “leading a team of technical experts responsible for protecting our networks, data and information systems”.
 
 I designed and began implementing this isolated multi-VM environment to gain hands-on experience in defensive network architecture, hardening, monitoring, and incident response readiness — skills directly transferable to Air Force cyberspace operations.
 
