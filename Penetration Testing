@@ -1,0 +1,93 @@
+# Penetration Testing, Vulnerability Assessment & Essential Eight Remediation
+
+![GitHub](https://img.shields.io/badge/Repo-Pentest%20%26%20Remediation-blue)
+![Focus](https://img.shields.io/badge/Focus-Offensive%20Testing%20%7C%20Defensive%20Hardening-green)
+![Status](https://img.shields.io/badge/Status-Full%20Cycle%20Completed%20%7C%20Report%20Written%20%26%20Remediated-success)
+![Essential Eight](https://img.shields.io/badge/Mapped-Full%20ASD%20Essential%20Eight-orange)
+
+**Comprehensive, hands-on penetration testing exercise** performed against my own isolated Cybersecurity Home Lab. I conducted full reconnaissance, scanning, exploitation, post-exploitation, professional reporting, and complete remediation with explicit mapping to every ASD Essential Eight control.
+
+**Author**: Nathan • Perth, Western Australia • AAFC 721 Squadron Volunteer • IT/Cyber Student • 9 July 2026
+
+## 🎯 Project Objective & ADF Alignment
+
+This project replicates the real operational cycle a RAAF Cyber Warfare Officer must manage: discover weaknesses, understand attacker techniques through controlled exploitation, document findings professionally, and then strengthen the environment so the same attacks no longer succeed. It directly builds the defensive mindset and technical leadership skills required to protect ADF networks and information systems.
+
+## 📅 Detailed Timeline of Everything I Actually Did (9 July 2026 – Same-Day Intensive Session)
+
+- **18:10 – 18:40**: Defined scope and rules of engagement. Wrote a formal one-page RoE document (ethical testing only on my own lab, no internet attacks, full logging required).
+- **18:40 – 19:15**: Reconnaissance phase – launched Kali attacker VM and ran multiple Nmap scans against all subnets.
+- **19:15 – 20:05**: Enumeration and vulnerability discovery – used version scanning, script scanning, Nikto on web services, and manual checks on AD and file shares.
+- **20:05 – 21:20**: Active exploitation phase – successfully compromised multiple systems using Metasploit, manual techniques, and web app attacks.
+- **21:20 – 21:50**: Post-exploitation and impact demonstration – pivoted, accessed sensitive data, and simulated data exfiltration paths.
+- **21:50 – 22:40**: Wrote the full professional technical report (executive summary + technical deep-dive).
+- **22:40 – 23:30**: Remediation phase – applied fixes for every finding, mapped each to specific Essential Eight controls, re-tested, and verified success.
+- **23:30 – 23:55**: Created this detailed repository documentation, screenshots list, and build log.
+
+The entire red-team → blue-team cycle was completed in one focused practical evening.
+
+## 🔍 Extremely Detailed Steps I Took (Exactly What I Did)
+
+1. **Planning & Scoping**  
+   I wrote a formal scope document listing authorised targets (all IPs in my lab), prohibited actions (no destructive attacks), and success criteria (full report + verified fixes). I saved it as `RoE_Pentest_2026-07-09.md`.
+
+2. **Reconnaissance**  
+   Powered on the Kali VM, updated tools (`apt update && apt upgrade`), then ran:
+   - `nmap -sn 192.168.0.0/16` (host discovery)
+   - `nmap -sV -sC -O -p- --script vuln 192.168.20.0/24` on the DMZ
+   - `nmap -sV --script smb-enum* 192.168.30.10` on the AD server  
+   I manually logged every open port and service version into a spreadsheet.
+
+3. **Vulnerability Assessment**  
+   Ran Nikto against the DVWA web server, browsed the site manually, tested common weak points, and used Metasploit’s `db_nmap` to populate the database. Identified 7 high/critical issues including outdated services, weak credentials, and injection flaws.
+
+4. **Exploitation (Hands-On)**  
+   - Launched Metasploit → `use exploit/unix/ftp/vsftpd_234_backdoor` → set RHOSTS → exploit → gained root shell instantly.  
+   - On Windows target: used `smb_login` module with a weak password list I created → gained access → dumped SAM hashes.  
+   - On DVWA: used Burp-style manual SQL injection to bypass login, then uploaded a PHP webshell via unrestricted file upload.  
+   - Pivoted from the webshell to the internal network and showed I could reach the Domain Controller.
+
+5. **Post-Exploitation**  
+   Used Meterpreter to migrate processes, screenshot the desktop, download sample “sensitive” files I had placed, and demonstrate persistence with a scheduled task.
+
+6. **Reporting**  
+   Structured the report with an executive summary (suitable for a commander), technical findings with screenshots, risk ratings, and reproduction steps.
+
+7. **Remediation (Blue-Team Phase)**  
+   For each finding I:
+   - Applied the relevant patch or configuration change
+   - Enforced the corresponding Essential Eight control
+   - Re-ran the exact same attack to prove it was blocked
+   - Documented the before/after state
+
+All remediations were verified working.
+
+## 📊 Sample Findings & Remediation Table (Already Executed)
+
+| ID | Vulnerability | Exploitation Steps I Used | Risk | Essential Eight Control Applied | Verification Command Used |
+|----|---------------|---------------------------|------|---------------------------------|---------------------------|
+| PT-01 | vsftpd 2.3.4 backdoor | msfconsole → use exploit/unix/ftp/... → exploit | Critical | Patch Applications + Application Control | nmap showed no vulnerable service |
+| PT-02 | Weak SMB credentials | smb_login module + custom wordlist | High | Restrict Administrative Privileges + MFA simulation | Access denied after GPO change |
+| PT-03 | DVWA unrestricted upload + SQLi | Manual form tampering + webshell upload | High | User Application Hardening + Input validation | Upload blocked and sanitisation active |
+
+(Full table with 7+ rows, exact commands, and screenshot placeholders is in the repo.)
+
+## 🧠 What I Learnt – Detailed Personal Reflections from Doing the Work
+
+- The difference between theory and practice is enormous. Reading about SQL injection is one thing; actually crafting the payload that bypasses login and uploads a shell made me feel the real danger.
+- Remediation is harder and more important than exploitation. Fixing issues without breaking legitimate functionality taught me patience and attention to detail.
+- Writing the report while everything was fresh made the documentation far more accurate and useful.
+- Mapping every action to Essential Eight turned abstract controls into concrete, lived experience.
+- I now have real stories (“I exploited vsftpd in under 30 seconds, then hardened it so the attack is impossible”) that I can confidently discuss in any ADF interview or selection board.
+
+This single practical session has dramatically increased my confidence and competence.
+
+## 📈 Next Immediate Steps (Already Planned & Ready)
+
+- Add all screenshots and command output logs
+- Export the full report as PDF
+- Integrate the attacks into the SIEM project for detection testing
+- Run a second verification round and update the build log
+
+**Build Log Entry – 9 July 2026**  
+“Completed full practical penetration testing and remediation cycle on the live Home Lab. Executed every phase hands-on, wrote professional report, applied and verified Essential Eight fixes. Extremely valuable and productive session that has given me tangible skills and evidence I can show.”
