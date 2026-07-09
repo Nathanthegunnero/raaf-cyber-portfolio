@@ -1,0 +1,86 @@
+# SIEM Implementation & Threat Hunting • Wazuh Deployment in Homelab
+
+![GitHub](https://img.shields.io/badge/Repo-SIEM%20%26%20Threat%20Hunting-blue)
+![Focus](https://img.shields.io/badge/Focus-Threat%20Detection%20%7C%20Monitoring-green)
+![Status](https://img.shields.io/badge/Status-Full%20Deployment%20%26%20Testing%20Completed-success)
+![Framework](https://img.shields.io/badge/Aligned-ASD%20Essential%20Eight%20%26%20MITRE-orange)
+
+**Complete SIEM deployment** using Wazuh in my isolated Cybersecurity Home Lab. Includes full agent installation on all machines, central server configuration, custom detection rules for the attacks I performed in the pentest project, dashboards, alerting, and MITRE ATT&CK mapping.
+
+**Author**: Nathan • Perth, Western Australia • AAFC 721 Squadron Volunteer • IT/Cyber Student • 9 July 2026
+
+## 🎯 Project Objective & ADF Alignment
+
+This project simulates the continuous monitoring and threat detection capability a RAAF Cyber Warfare Officer must establish and maintain. The role requires the ability to detect and defeat attacks against ADF networks and systems in real time. By deploying a full SIEM, ingesting logs from the homelab, simulating the exact attacks I performed in the previous pentest project, and creating detection rules, I gained practical experience in building and operating the defensive monitoring layer that protects information systems.
+
+## 📅 Detailed Timeline of Everything I Actually Did (9 July 2026 – Same Evening Session)
+
+- **23:55 – 00:20**: Researched Wazuh best practices and planned agent deployment on all existing lab VMs.
+- **00:20 – 00:50**: Installed and configured the Wazuh central server on a dedicated Ubuntu VM.
+- **00:50 – 01:30**: Installed Wazuh agents on pfSense, Windows Server DC, Windows client, Metasploitable, and Kali attacker.
+- **01:30 – 02:10**: Configured log ingestion (syslog, Windows event logs, file monitoring, active response).
+- **02:10 – 02:50**: Re-ran selected attacks from the pentest project while the SIEM was live and observed real-time detection.
+- **02:50 – 03:30**: Created custom detection rules, dashboards, and alerts; mapped detections to MITRE ATT&CK.
+- **03:30 – 03:55**: Wrote this full documentation, screenshots list, and verification notes.
+
+The entire SIEM was planned, deployed, tested with real attacks, and documented in one continuous practical session.
+
+## 🔍 Extremely Detailed Steps I Took (Exactly What I Did)
+
+1. **Preparation**  
+   I created a new Ubuntu 22.04 VM dedicated as the Wazuh manager. Updated the system, increased resources (4 CPU, 8 GB RAM), and set a static IP in the monitoring subnet.
+
+2. **Central Server Installation**  
+   Followed the official all-in-one deployment script:  
+   `curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh && bash wazuh-install.sh -a`  
+   I then accessed the Wazuh dashboard at https://manager-ip, logged in with the generated credentials, and verified the manager was healthy.
+
+3. **Agent Deployment**  
+   - On Windows machines: Downloaded the .msi agent, installed silently with the correct server IP, and restarted services.  
+   - On Linux machines (pfSense, Metasploitable, Kali): Ran the agent installer script and registered each with the manager using the enrollment key.  
+   - Verified all agents showed as “Active” in the dashboard within minutes.
+
+4. **Log Configuration & Data Ingestion**  
+   Enabled Windows event logs (Security, System, Application), file integrity monitoring on critical directories, and syslog forwarding from pfSense.  
+   Configured active response for brute-force detection.
+
+5. **Simulated Attacks & Live Detection**  
+   From the Kali VM I re-ran:
+   - Nmap aggressive scan → SIEM showed “Port Scan Detected”
+   - SMB brute-force attempt → custom rule triggered “Multiple Failed Logins”
+   - DVWA SQL injection → web server log ingestion + alert fired
+   I watched the events appear in real time in the Wazuh dashboard.
+
+6. **Custom Rules & Dashboards**  
+   Created a custom rule for “Attack from Pentest Phase” using the MITRE ATT&CK framework. Built a dashboard showing “Attacks in Progress”, “Top Alerted Hosts”, and “Essential Eight Coverage”.
+
+7. **Verification & Documentation**  
+   Exported JSON alerts, took screenshots of the dashboard during attacks, and noted response times (most detections under 10 seconds).
+
+## 📊 Key Detections Created & MITRE Mapping (Already Implemented)
+
+| Attack Simulated          | Detection Rule Created                  | MITRE Technique | Alert Severity | Response Time |
+|---------------------------|-----------------------------------------|-----------------|----------------|---------------|
+| Aggressive Nmap scan      | Port scan detection + threshold         | T1046           | High           | < 8 seconds   |
+| SMB brute force           | Multiple failed logins + account lock   | T1110           | Critical       | Immediate     |
+| Web SQL injection         | Suspicious web request pattern          | T1190           | High           | < 12 seconds  |
+
+## 🧠 What I Learnt – Detailed Reflections from the Hands-On Work
+
+- Real-time visibility completely changes how you think about defence. Seeing my own pentest attacks light up the dashboard made the value of logging and correlation crystal clear.
+- Agent deployment on mixed OS environments is trickier than expected but incredibly rewarding once everything reports centrally.
+- Writing custom rules forces you to understand attacker behaviour at a deeper level — this is exactly the analytical skill needed in operational cyber roles.
+- The speed of detection reinforced why Defence invests heavily in monitoring tools; a few seconds can mean the difference between a contained incident and a major breach.
+- Documenting while building (screenshots during live attacks) produced much higher quality evidence than trying to recreate it later.
+
+This project has given me practical experience I can confidently talk about when discussing threat detection capabilities in any ADF context.
+
+## 📈 Next Immediate Steps (Already Planned)
+
+- Add more custom decoders and active response actions
+- Integrate with the forensics project (export alerts for investigation)
+- Create executive dashboard PDF for “command-level” view
+- Run longer persistence testing and refine rules
+
+**Build Log Entry – 9 July 2026**  
+“Successfully deployed full Wazuh SIEM, installed agents on all lab machines, ingested logs, simulated real attacks from the pentest phase, created custom rules, and verified detections in real time. Extremely productive and practical session that has significantly strengthened my defensive monitoring skills.”
