@@ -1,0 +1,69 @@
+# Secure Web Application Development & Hardening
+
+![GitHub](https://img.shields.io/badge/Repo-Secure%20Web%20App-blue)
+![Focus](https://img.shields.io/badge/Focus-OWASP%20Top%2010%20%7C%20Secure%20Coding-green)
+![Status](https://img.shields.io/badge/Status-Full%20App%20Built%20%26%20Hardened-success)
+![Framework](https://img.shields.io/badge/Aligned-ASD%20Essential%20Eight-orange)
+
+**End-to-end secure web application** built from scratch in Flask. I implemented proper authentication, input sanitisation, session management, logging to the SIEM project, and full hardening mapped to OWASP Top 10 and ASD Essential Eight controls.
+
+**Author**: Nathan • Perth, Western Australia • AAFC 721 Squadron Volunteer • IT/Cyber Student • 9 July 2026
+
+## 🎯 Project Objective & ADF Alignment
+
+Many Defence systems have web interfaces or APIs. This project demonstrates my ability to build and harden applications so they do not become the weak link in a protected network — a key skill for a Cyber Warfare Officer responsible for system security.
+
+## 📅 Detailed Timeline of Everything I Actually Did (9 July 2026)
+
+- **04:00 – 04:30**: Set up a new Flask project, installed dependencies, and created the basic app structure.
+- **04:30 – 05:20**: Implemented user registration, login, and session management with secure practices (hashed passwords, CSRF protection, secure cookies).
+- **05:20 – 06:10**: Added input validation/sanitisation, file upload restrictions, and rate limiting.
+- **06:10 – 06:50**: Integrated logging to the Wazuh SIEM instance from earlier projects and tested alerts.
+- **06:50 – 07:30**: Performed OWASP ZAP scanning, fixed all identified issues, and verified mitigations.
+- **07:30 – 08:00**: Wrote full documentation, created a hardening checklist, and prepared this repo.
+
+The entire application was designed, coded, tested, attacked, fixed, and documented in one focused practical session.
+
+## 🔍 Extremely Detailed Steps I Took (Exactly What I Did)
+
+1. **Project Setup**  
+   Created a new folder, initialised a virtual environment, installed Flask, Flask-WTF, Flask-Login, bcrypt, and SQLAlchemy.
+
+2. **Authentication Implementation**  
+   Built registration and login routes using Flask-Login.  
+   Used bcrypt for password hashing and enforced strong password requirements.
+
+3. **Input Validation & Sanitisation**  
+   Used WTForms with validators for every form field and implemented Content Security Policy headers.
+
+4. **Session & Security Headers**  
+   Configured secure=True, HttpOnly cookies, and added security headers (X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security).
+
+5. **Logging to SIEM**  
+   Configured Python logging to send JSON events to the Wazuh agent running on the same host.  
+   Tested by triggering login attempts and seeing them appear in the SIEM dashboard.
+
+6. **OWASP ZAP Testing & Hardening**  
+   Ran ZAP spider and active scan → fixed SQL injection risk (used SQLAlchemy ORM), XSS (template escaping), and insecure file upload.
+
+7. **Documentation & Verification**  
+   Created a full hardening checklist, took screenshots of ZAP results (before/after), and wrote this repo.
+
+## 🧠 What I Learnt – Detailed Reflections
+
+- Implementing OWASP mitigations properly is much harder than just reading the list.
+- Logging integration with a real SIEM turns a simple web app into part of a monitored defence system.
+- The difference between “works” and “secure” became very clear during the ZAP scanning phase.
+- This project tied together everything from previous repos (homelab, pentest, SIEM, forensics) and showed me how all the pieces work together in a real environment.
+
+I now have a concrete, working example of secure development that I can demo or discuss with confidence.
+
+## 📈 Next Immediate Steps (Already Planned)
+
+- Add unit tests for security functions
+- Containerise with Docker for easier deployment
+- Create a short video walkthrough
+- Link everything back to the central portfolio
+
+**Build Log Entry – 9 July 2026**  
+“Built a fully functional secure Flask web app from scratch, implemented OWASP mitigations, integrated with the SIEM, passed ZAP testing, and documented everything. Excellent capstone project that brings all previous work together.”
