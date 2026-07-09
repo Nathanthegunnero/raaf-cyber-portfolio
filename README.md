@@ -13,7 +13,7 @@
 
 ## 🎯 Executive Summary & ADF Alignment
 
-As described on the official ADF Careers website, the **RAAF Cyber Warfare Officer** role places the officer “at the heart of the Air Force’s emerging cyberspace warfare capability, leading a team of technical experts responsible for protecting our networks, data and information systems.”
+As described on the official ADF Careers website, the **Information Warfare Officer** role places the officer “at the heart of the Air Force’s emerging cyberspace warfare capability, leading a team of technical experts responsible for protecting our networks, data and information systems.”
 
 This portfolio showcases my proactive, self-directed preparation through:
 - Defensive network architecture and hardening
