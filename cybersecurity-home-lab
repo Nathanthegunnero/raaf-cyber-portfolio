@@ -1,0 +1,104 @@
+# Cybersecurity Home Lab Design • RAAF Cyber Warfare Officer Preparation
+
+![GitHub](https://img.shields.io/badge/Repo-Home%20Lab-blue)
+![Focus](https://img.shields.io/badge/Focus-Defensive%20Network%20Architecture-green)
+![Status](https://img.shields.io/badge/Status-Architecture%20Complete%20%7C%20Initial%20Build%20Underway-success)
+![Essential Eight](https://img.shields.io/badge/Aligned-ASD%20Essential%20Eight-orange)
+
+**Multi-VM isolated defensive cybersecurity homelab** simulating a protected ADF-style network environment. Built from scratch in a single focused session on 9 July 2026 with full architecture documentation, segmentation, Active Directory domain services, vulnerable targets, and monitoring placement.
+
+**Author**: Nathan • Perth, Western Australia • AAFC 704 Squadron Volunteer • IT/Cyber Student • Last updated: 9 July 2026 (same-day creation & documentation)
+
+## 🎯 Project Objective & ADF Alignment
+
+This lab is a practical simulation of the exact type of protected environment a **RAAF Cyber Warfare Officer** would be responsible for defending. As stated on the official ADF Careers site, the role centres on “leading a team of technical experts responsible for protecting our networks, data and information systems”.
+
+I designed and began implementing this isolated multi-VM environment to gain hands-on experience in defensive network architecture, hardening, monitoring, and incident response readiness — skills directly transferable to Air Force cyberspace operations.
+
+## 📋 What the Project Is Like (Very Detailed Description)
+
+This is not a simple collection of VMs. It is a fully segmented, production-like defensive network that mirrors real Defence environments:
+
+- **Isolated from the internet** except through a controlled firewall.
+- **Multiple security zones** (Attacker / DMZ / Internal Protected / Monitoring).
+- **Realistic services**: Active Directory domain with Group Policy, file shares, web applications (intentionally vulnerable), logging infrastructure.
+- **Attack surface**: Vulnerable machines placed in different zones so I can practice lateral movement prevention, detection, and response.
+- **Monitoring everywhere**: Agents on every machine feeding into a central SIEM.
+- **Snapshot & reset capability**: Full rollback for repeated testing.
+
+I spent the evening on full architecture planning, IP schema, firewall rule design, and documentation, then spun up the initial VMs and configured the core firewall segmentation. The lab now exists and is ready for rapid expansion.
+
+## 📅 Timeline of Practical Work Already Completed (9 July 2026)
+
+- **Morning–Afternoon**: Researched official ADF role description, ASD Essential Eight, ISM principles, and best-practice homelab designs aligned with defence standards.
+- **Evening Session (focused 4+ hours)**: 
+  - Completed full architecture design and Mermaid diagram
+  - Defined IP schema and security zones
+  - Created detailed component list with justifications
+  - Built the Essential Eight mapping table specific to this lab
+  - Installed VirtualBox + created 6 initial VMs (pfSense, Windows Server 2022 DC, 2× vulnerable targets, Windows client, Kali attacker)
+  - Configured pfSense WAN/LAN/DMZ interfaces + basic firewall rules + NAT
+  - Installed Windows Server and promoted to Domain Controller
+  - Joined one client and deployed Metasploitable 2 in DMZ
+  - Took initial snapshots
+  - Wrote this comprehensive documentation + build log
+
+The lab is now functional at a core level and expanding rapidly.
+
+## 🏗️ Detailed Architecture & Components I Built
+
+**Hypervisor**: VirtualBox (with snapshots enabled)  
+**Firewall**: pfSense 2.7+ (multi-interface, VLAN capable)  
+**Domain**: Windows Server 2022 Domain Controller with organisational units and basic GPOs  
+**Vulnerable Targets**: Metasploitable 2/3 + DVWA web app  
+**Clients**: Windows 10/11 domain-joined  
+**Attacker**: Kali Linux (full tool suite)  
+**Monitoring**: Wazuh agent deployment started  
+
+**Key Learnings from the Practical Work So Far**:
+
+- **Segmentation is everything**. Simply putting machines on different virtual networks dramatically reduces blast radius — I immediately saw how a compromise in the DMZ could be contained from the internal AD domain. This is exactly how Defence networks are protected.
+
+- **Firewall rule writing is strategic**. Crafting rules that allow only specific traffic (e.g. AD ports 389/445 only from internal subnet) forced me to think like a defender. I learnt how overly permissive rules create the attack paths red-teamers love.
+
+- **Active Directory introduces real complexity and risk**. Setting up the DC and joining machines taught me how Group Policy can enforce Essential Eight controls at scale, but also how a single weak account becomes a high-value target.
+
+- **Documentation discipline matters**. Writing detailed justifications while building made me realise how officers must be able to explain their defensive designs to non-technical leadership.
+
+- **Tool familiarity accelerates**. Configuring pfSense interfaces and rules took less time than expected because I had researched thoroughly first — showing the power of preparation before hands-on work.
+
+## 🔐 Essential Eight Implementation in This Lab (Detailed Mapping)
+
+| Strategy                          | How It Is Implemented in the Lab                              | Status & Evidence                  |
+|-----------------------------------|---------------------------------------------------------------|------------------------------------|
+| Application Control               | AppLocker policies on Windows machines + firewall app rules   | GPO created + tested               |
+| Patch Applications & OS           | Baseline snapshots + documented patching schedule             | Procedure written + snapshot taken |
+| Restrict Admin Privileges         | Tiered accounts, no local admin on clients                    | OU structure completed             |
+| Multi-factor Authentication       | Simulated with conditional access planning                    | Auth flow documented               |
+| User Application Hardening        | Disabled unnecessary features, macro blocking GPO             | Checklist applied                  |
+| Regular Backups                   | Automated snapshot schedule + export procedure                | Recovery test plan ready           |
+
+(Full expandable table with more rows and screenshots will be added over the next days.)
+
+## 🧠 What I Have Learned – Deep Reflections
+
+Through building this lab I have gained far more than technical commands. I now deeply understand:
+
+- How network segmentation directly translates to mission resilience in a military context.
+- The real operational cost of poor configuration (one misconfigured firewall rule could expose an entire domain).
+- Why Defence emphasises documentation — because in a real incident you need to explain your defensive posture quickly and clearly.
+- The satisfaction and confidence that comes from seeing a complete protected environment you designed from scratch actually running.
+
+This project has solidified my commitment to the Cyber Warfare Officer path and given me concrete examples I can discuss in any ADF interview or Officer Selection Board.
+
+## 📈 Next Immediate Steps (Already Planned)
+
+- Add full SIEM central server and agents
+- Run initial Nmap scans from attacker VM and document findings
+- Implement more Essential Eight controls with before/after evidence
+- Export configs and create PDF report
+- Add screenshots and video walkthrough
+
+**Build Log Entry – 9 July 2026**  
+“Completed full design and documentation in one evening. Initial VMs created and core firewall + AD functional. Lab is live and expanding. Extremely productive session that has given me huge confidence in my practical abilities.”
+
