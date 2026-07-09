@@ -7,7 +7,7 @@
 
 **Central hub for my practical cybersecurity projects** demonstrating the skills required to lead technical teams in **protecting ADF networks, data and information systems** — the core responsibility of a Royal Australian Air Force (RAAF) Cyber Warfare Officer.
 
-**Location**: Perth, Western Australia • AAFC 704 Squadron Volunteer • IT/Cyber Student • Developing post-quantum cryptography (Artemis) project
+**Location**: Perth, Western Australia • AAFC 721 Squadron Volunteer • IT/Cyber Student
 
 ---
 
