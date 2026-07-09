@@ -11,7 +11,7 @@
 
 ## 🎯 Project Objective & ADF Alignment
 
-This project simulates the continuous monitoring and threat detection capability a RAAF Cyber Warfare Officer must establish and maintain. The role requires the ability to detect and defeat attacks against ADF networks and systems in real time. By deploying a full SIEM, ingesting logs from the homelab, simulating the exact attacks I performed in the previous pentest project, and creating detection rules, I gained practical experience in building and operating the defensive monitoring layer that protects information systems.
+This project simulates the continuous monitoring and threat detection capability a Information Warfare Officer must establish and maintain. The role requires the ability to detect and defeat attacks against ADF networks and systems in real time. By deploying a full SIEM, ingesting logs from the homelab, simulating the exact attacks I performed in the previous pentest project, and creating detection rules, I gained practical experience in building and operating the defensive monitoring layer that protects information systems.
 
 ## 📅 Detailed Timeline of Everything I Actually Did (9 July 2026 – Same Evening Session)
 
