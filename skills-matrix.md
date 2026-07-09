@@ -69,7 +69,7 @@ The ISM provides the broader framework used by Defence. My portfolio touches all
 - **Recover** – Backup and restoration considerations
 
 ## Defence University Sponsorship (DUS) & AAFC Context
-I am actively preparing for DUS to support my remaining IT/cyber studies while committing to service. AAFC 704 Squadron volunteering provides foundational military knowledge and leadership experience that complements the technical portfolio.
+I am actively preparing for DUS to support my remaining IT/cyber studies while committing to service. AAFC 721 Squadron volunteering provides foundational military knowledge and leadership experience that complements the technical portfolio.
 
 ## Strategic Forward Thinking – Post-Quantum Cryptography (Artemis Project)
 Quantum computing poses a significant future risk to current encryption used in Defence systems. My work on hybrid PQC implementations demonstrates proactive mitigation of strategic threats.
