@@ -1,4 +1,4 @@
-# Skills Matrix • RAAF Cyber Warfare Officer Preparation
+# Skills Matrix • Information Warfare Officer
 
 **Nathan** | Updated 9 July 2026 | All projects conducted ethically in isolated lab environments
 
