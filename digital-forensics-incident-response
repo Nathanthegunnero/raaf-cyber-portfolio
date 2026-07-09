@@ -1,0 +1,85 @@
+# Digital Forensics & Incident Response Simulation
+
+![GitHub](https://img.shields.io/badge/Repo-Forensics%20%26%20IR-blue)
+![Focus](https://img.shields.io/badge/Focus-Evidence%20Acquisition%20%7C%20Analysis%20%7C%20Response-green)
+![Status](https://img.shields.io/badge/Status-Full%20Simulation%20Completed%20%7C%20Report%20Written-success)
+![Framework](https://img.shields.io/badge/Aligned-ASD%20Essential%20Eight%20%26%20Incident%20Response-orange)
+
+**Complete digital forensics and incident response exercise** on a simulated compromised machine from my homelab. I acquired disk and memory images, performed full analysis with Autopsy and Volatility, reconstructed the timeline of the attack I performed in the pentest project, wrote a professional forensic report, and developed response playbooks.
+
+**Author**: Nathan • Perth, Western Australia • AAFC 721 Squadron Volunteer • IT/Cyber Student • 9 July 2026
+
+## 🎯 Project Objective & ADF Alignment
+
+This project builds the investigation and response skills a RAAF Cyber Warfare Officer needs when an incident occurs on defended systems. The role requires the ability to rapidly acquire evidence, analyse it, reconstruct attacker actions, and recommend containment and recovery steps. By simulating a real compromise from my earlier pentest, I practised the full forensic workflow in a controlled environment.
+
+## 📅 Detailed Timeline of Everything I Actually Did (9 July 2026 – Late Evening Session)
+
+- **00:00 – 00:25**: Prepared a “compromised” Windows 10 VM by re-running a light version of the webshell attack from the pentest project and leaving deliberate artefacts (modified files, registry keys, processes).
+- **00:25 – 00:45**: Acquired forensic images – used FTK Imager to create a full E01 disk image and a raw memory dump.
+- **00:45 – 01:30**: Ingested the images into Autopsy and began timeline analysis.
+- **01:30 – 02:15**: Performed memory forensics with Volatility (pslist, psscan, netscan, malfind, etc.).
+- **02:15 – 03:00**: Reconstructed the full attack timeline and wrote the professional forensic report.
+- **03:00 – 03:40**: Developed containment and eradication playbooks and verified recovery steps.
+- **03:40 – 04:00**: Created this comprehensive repository documentation and build log.
+
+The entire forensics cycle was completed hands-on in one focused practical session.
+
+## 🔍 Extremely Detailed Steps I Took (Exactly What I Did)
+
+1. **Incident Simulation**  
+   I re-compromised a Windows 10 VM using the webshell upload method from the pentest project, created a fake “sensitive document” that was exfiltrated, added suspicious registry keys, and left a hidden process running.
+
+2. **Evidence Acquisition**  
+   - Shut down the VM cleanly.  
+   - Used FTK Imager on the host to create a full E01 disk image of the virtual hard drive.  
+   - Used `dd` on a Linux helper VM to acquire a raw memory dump before shutdown.
+
+3. **Autopsy Analysis**  
+   - Created a new case named “Lab-Incident-2026-07-09”.  
+   - Added the E01 image and processed it with all ingest modules (file analysis, keyword search, timeline, web artefacts).  
+   - Used the Timeline view to reconstruct file creation/modification times.  
+   - Found the webshell, suspicious PowerShell execution, and exfiltrated file.
+
+4. **Volatility Memory Forensics**  
+   - Ran `vol.py -f memdump.raw imageinfo` to identify the profile.  
+   - `pslist` and `psscan` to find hidden/malicious processes.  
+   - `netscan` to see suspicious connections.  
+   - `malfind` to detect injected code.  
+   - `filescan` and `dumpfiles` to recover the exfiltrated document from memory.
+
+5. **Timeline Reconstruction & Reporting**  
+   I built a clear chronological timeline showing: initial foothold → privilege escalation → data access → exfiltration.  
+   Wrote a full forensic report with executive summary, technical findings, and recommendations.
+
+6. **Response Playbooks**  
+   Developed step-by-step containment (isolate host), eradication (remove webshell and persistence), and recovery (restore from snapshot + monitoring enhancement) procedures.
+
+## 📊 Key Forensic Findings Table (Already Documented)
+
+| Artefact Type       | Finding                              | Tool Used     | MITRE Mapping | Recommended Action (Essential Eight link) |
+|---------------------|--------------------------------------|---------------|---------------|-------------------------------------------|
+| Disk – File         | webshell.php uploaded                | Autopsy       | T1190         | User App Hardening + App Control          |
+| Registry            | Persistence Run key added            | Autopsy       | T1547         | Restrict Admin Privs                      |
+| Memory – Process    | Hidden svchost with injection        | Volatility    | T1055         | Application Control + Monitoring          |
+| Network             | Outbound connection to attacker IP   | Volatility    | T1071         | MFA + Network segmentation                |
+
+## 🧠 What I Learnt – Detailed Reflections from the Hands-On Work
+
+- Acquiring images properly (E01 with hash verification) is critical — one mistake and the entire chain of custody is broken.
+- Autopsy’s timeline view is incredibly powerful; seeing the exact sequence of attacker actions made the incident feel real.
+- Volatility revealed artefacts that disk analysis missed (injected code, network connections that had already closed).
+- Writing the report while the evidence was fresh produced a much higher quality document.
+- Developing playbooks taught me that good response is not just technical — it requires clear, actionable steps that a team can follow under pressure.
+
+This project has given me tangible experience in the investigation side of cyber defence that I can discuss confidently in any selection process.
+
+## 📈 Next Immediate Steps (Already Planned)
+
+- Add all screenshots and exported reports as PDF
+- Create a video walkthrough of the Autopsy timeline
+- Link the incident alerts to the SIEM project for end-to-end simulation
+- Expand the response playbooks with more detailed checklists
+
+**Build Log Entry – 9 July 2026**  
+“Completed full digital forensics and incident response simulation on a deliberately compromised lab machine. Acquired images, analysed with Autopsy and Volatility, reconstructed timeline, wrote report, and developed playbooks. Extremely practical and valuable session that has strengthened my investigative capabilities.”
