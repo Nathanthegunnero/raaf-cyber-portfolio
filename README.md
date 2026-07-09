@@ -1,11 +1,11 @@
-# RAAF Cyber Warfare Officer Preparation Portfolio • Nathan
+#Information Warfare Officer Preparation Portfolio • Nathan
 
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 ![Focus](https://img.shields.io/badge/Focus-Defensive%20Cybersecurity%20%7C%20ASD%20Essential%20Eight-blue)
 ![Status](https://img.shields.io/badge/Status-Actively%20Developing-success)
 ![Location](https://img.shields.io/badge/Location-Western%20Australia-blue)
 
-**Central hub for my practical cybersecurity projects** demonstrating the skills required to lead technical teams in **protecting ADF networks, data and information systems** — the core responsibility of a Royal Australian Air Force (RAAF) Cyber Warfare Officer.
+**Central hub for my practical cybersecurity projects** demonstrating the skills required to lead technical teams in **protecting ADF networks, data and information systems**  Information Warfare Officer.
 
 **Location**: Perth, Western Australia • AAFC 721 Squadron Volunteer • IT/Cyber Student
 
