@@ -1,0 +1,69 @@
+id: E8-04
+strategy: Restrict administrative privileges
+description: >
+  Looks for evidence of least-privilege administration: separate admin
+  accounts, privilege-use logging, and a small local-admin set. ML2
+  requires MFA on administrative use. ML3 tightens the local-admin count
+  to one. This checker does not describe privilege-escalation techniques.
+ism: Protect
+evidence_section: admin_privileges
+maturity_rules:
+  1:
+    all:
+      - field: admin_privileges.separate_admin_accounts
+        equals: true
+      - field: admin_privileges.priv_use_logged
+        equals: true
+      - field: admin_privileges.local_admin_count
+        lte: 3
+  2:
+    all:
+      - field: admin_privileges.separate_admin_accounts
+        equals: true
+      - field: admin_privileges.priv_use_logged
+        equals: true
+      - field: admin_privileges.local_admin_count
+        lte: 3
+      - field: admin_privileges.admin_mfa
+        equals: true
+  3:
+    all:
+      - field: admin_privileges.separate_admin_accounts
+        equals: true
+      - field: admin_privileges.priv_use_logged
+        equals: true
+      - field: admin_privileges.local_admin_count
+        lte: 1
+      - field: admin_privileges.admin_mfa
+        equals: true
+findings:
+  - id: separate
+    field: admin_privileges.separate_admin_accounts
+    equals: true
+    maturity: 1
+    pass: Separate administrative accounts are in use
+    fail: Separate administrative accounts are not in use
+  - id: logged
+    field: admin_privileges.priv_use_logged
+    equals: true
+    maturity: 1
+    pass: Privileged use is logged
+    fail: Privileged use is not logged
+  - id: count_ml1
+    field: admin_privileges.local_admin_count
+    lte: 3
+    maturity: 1
+    pass: Local administrator count is within the ML1 limit (3)
+    fail: Local administrator count exceeds the ML1 limit (3)
+  - id: mfa
+    field: admin_privileges.admin_mfa
+    equals: true
+    maturity: 2
+    pass: Administrative use requires MFA
+    fail: Administrative use does not require MFA
+  - id: count_ml3
+    field: admin_privileges.local_admin_count
+    lte: 1
+    maturity: 3
+    pass: Local administrator count is within the ML3 limit (1)
+    fail: Local administrator count exceeds the ML3 limit (1)

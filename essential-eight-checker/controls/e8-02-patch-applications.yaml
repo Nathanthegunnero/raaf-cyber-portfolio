@@ -1,0 +1,76 @@
+id: E8-02
+strategy: Patch applications
+description: >
+  Looks for evidence that internet-facing applications (Office and the
+  browser) are current, and that the oldest critical application backlog
+  is within a lab-model window. ML2 also requires other applications to
+  be current with a tighter backlog. ML3 uses a two-day backlog. This is
+  a simplified lab model, not the official ASD patching timetable.
+ism: Protect
+evidence_section: patch_applications
+maturity_rules:
+  1:
+    all:
+      - field: patch_applications.office_current
+        equals: true
+      - field: patch_applications.browser_current
+        equals: true
+      - field: patch_applications.critical_unpatched_days_max
+        lte: 14
+  2:
+    all:
+      - field: patch_applications.office_current
+        equals: true
+      - field: patch_applications.browser_current
+        equals: true
+      - field: patch_applications.other_apps_current
+        equals: true
+      - field: patch_applications.critical_unpatched_days_max
+        lte: 7
+  3:
+    all:
+      - field: patch_applications.office_current
+        equals: true
+      - field: patch_applications.browser_current
+        equals: true
+      - field: patch_applications.other_apps_current
+        equals: true
+      - field: patch_applications.critical_unpatched_days_max
+        lte: 2
+findings:
+  - id: office
+    field: patch_applications.office_current
+    equals: true
+    maturity: 1
+    pass: Office applications are current
+    fail: Office applications are not current
+  - id: browser
+    field: patch_applications.browser_current
+    equals: true
+    maturity: 1
+    pass: Browser is current
+    fail: Browser is not current
+  - id: backlog_ml1
+    field: patch_applications.critical_unpatched_days_max
+    lte: 14
+    maturity: 1
+    pass: Critical application backlog is within 14 days
+    fail: Critical application backlog exceeds 14 days
+  - id: other
+    field: patch_applications.other_apps_current
+    equals: true
+    maturity: 2
+    pass: Other applications are current
+    fail: Other applications are not current
+  - id: backlog_ml2
+    field: patch_applications.critical_unpatched_days_max
+    lte: 7
+    maturity: 2
+    pass: Critical application backlog is within 7 days
+    fail: Critical application backlog exceeds 7 days (ML2)
+  - id: backlog_ml3
+    field: patch_applications.critical_unpatched_days_max
+    lte: 2
+    maturity: 3
+    pass: Critical application backlog is within 2 days
+    fail: Critical application backlog exceeds 2 days (ML3)
