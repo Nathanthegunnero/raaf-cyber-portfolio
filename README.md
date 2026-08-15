@@ -39,7 +39,7 @@ All work is conducted ethically in isolated lab environments. Documentation foll
 |-----------------------------|--------------------------------------------------------|----------------------------------------|----------------------------------------------------|
 | Network Defence             | pfSense/OPNsense, VLAN segmentation, firewall rules    | Home Lab Design                        | Protecting ADF networks and information systems   |
 | Vulnerability Management    | Nmap, Burp Suite, OWASP ZAP, remediation               | Pentest + Essential Eight Report       | Reducing attack surface on Defence systems         |
-| Threat Detection & SIEM     | Wazuh/ELK, log analysis, custom alerts, MITRE ATT&CK   | SIEM Implementation                    | Proactive threat detection & situational awareness |
+| Threat Detection & SIEM     | Wazuh/ELK, log analysis, custom alerts, MITRE ATT&CK, Detection Engineering Toolkit | SIEM Implementation + [Detection Engineering Toolkit](detection-engineering-toolkit/) | Proactive threat detection & situational awareness |
 | Incident Response & Forensics | Autopsy, Volatility, timeline reconstruction          | Forensics Simulation                   | Incident handling and investigation                |
 | Modern & Quantum Cryptography | Kyber, Dilithium (liboqs), hybrid schemes              | PQC / Artemis Demo                     | Long-term protection against quantum threats       |
 | Secure Development          | Input sanitisation, auth, OWASP Top 10                 | Secure Web App Project                 | Hardening defence applications                     |
@@ -70,6 +70,7 @@ Every project in this portfolio includes explicit mapping tables showing how the
 4. **Digital Forensics & Incident Response** – Analysis of simulated incidents
 5. **Post-Quantum Cryptography Demo (Artemis)** – Hybrid crypto implementations & defence implications
 6. **Secure Web Application Development** – End-to-end secure coding
+7. **Detection Engineering Toolkit** – runnable Python rules engine: synthetic logs → YAML detections → MITRE ATT&CK + Essential Eight mapping. See [`detection-engineering-toolkit/`](detection-engineering-toolkit/)
 
 **Status note**: Comprehensive architecture designs, specifications, skills matrices, and sample reports are complete and in this repo. Hands-on implementation, screenshots, configs, and test artefacts are being added daily with dated build logs.
 
@@ -79,8 +80,7 @@ Every project in this portfolio includes explicit mapping tables showing how the
 ---
 
 ## 📚 Additional Resources in This Repo
-- `docs/skills-matrix.md` – Expanded table
-- `docs/adf-alignment-detailed.md` – Full ISM + DUS + Essential Eight mappings
+- [`skills-matrix.md`](skills-matrix.md) – Expanded table
 - `/assets/` – Diagrams (to be added)
 - Compiled PDFs (added below)
 
@@ -91,5 +91,5 @@ Every project in this portfolio includes explicit mapping tables showing how the
 
 **All work is original, ethical, and for educational/professional development.**
 
-Last updated: 9 July 2026  
+Last updated: 15 August 2026  
 Perth, WA • Open to feedback from ADF mentors
