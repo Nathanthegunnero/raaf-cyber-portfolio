@@ -1,0 +1,55 @@
+{
+  "synthetic": true,
+  "label": "SYNTHETIC LAB HOST \u2014 not a real workstation",
+  "host": "WS-LAB-E8-GAPS",
+  "os": "Windows 11",
+  "collected_at": "2026-08-15T02:05:00Z",
+  "note": "Hand-written lab evidence with obvious control gaps. Intended to score ML0 overall.",
+  "application_control": {
+    "enabled": false,
+    "mode": "audit",
+    "unsigned_blocked": false,
+    "drivers_controlled": false,
+    "scripts_controlled": false
+  },
+  "patch_applications": {
+    "office_current": false,
+    "browser_current": false,
+    "other_apps_current": false,
+    "critical_unpatched_days_max": 90
+  },
+  "patch_os": {
+    "os_current": false,
+    "days_since_last_patch": 60,
+    "auto_update": false
+  },
+  "admin_privileges": {
+    "local_admin_count": 8,
+    "admin_mfa": false,
+    "separate_admin_accounts": false,
+    "priv_use_logged": false
+  },
+  "office_macros": {
+    "internet_macros_blocked": false,
+    "unsigned_macros_blocked": false,
+    "trusted_locations_locked": false
+  },
+  "app_hardening": {
+    "ads_blocked": false,
+    "java_disabled": false,
+    "flash_disabled": false,
+    "office_ole_disabled": false,
+    "web_browser_hardening": false
+  },
+  "mfa": {
+    "enabled_for_remote": false,
+    "enabled_for_admins": false,
+    "phishing_resistant": false
+  },
+  "backups": {
+    "enabled": false,
+    "offline_or_immutable": false,
+    "tested_restore": false,
+    "frequency_days": 30
+  }
+}

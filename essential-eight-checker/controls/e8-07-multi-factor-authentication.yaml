@@ -1,0 +1,47 @@
+id: E8-07
+strategy: Multi-factor authentication
+description: >
+  Looks for evidence that multi-factor authentication is in use for
+  remote access (ML1), for administrators (ML2), and that the method is
+  phishing-resistant (ML3). This checker does not describe how to bypass
+  MFA.
+ism: Protect
+evidence_section: mfa
+maturity_rules:
+  1:
+    all:
+      - field: mfa.enabled_for_remote
+        equals: true
+  2:
+    all:
+      - field: mfa.enabled_for_remote
+        equals: true
+      - field: mfa.enabled_for_admins
+        equals: true
+  3:
+    all:
+      - field: mfa.enabled_for_remote
+        equals: true
+      - field: mfa.enabled_for_admins
+        equals: true
+      - field: mfa.phishing_resistant
+        equals: true
+findings:
+  - id: remote
+    field: mfa.enabled_for_remote
+    equals: true
+    maturity: 1
+    pass: MFA is enabled for remote access
+    fail: MFA is not enabled for remote access
+  - id: admins
+    field: mfa.enabled_for_admins
+    equals: true
+    maturity: 2
+    pass: MFA is enabled for administrators
+    fail: MFA is not enabled for administrators
+  - id: phish
+    field: mfa.phishing_resistant
+    equals: true
+    maturity: 3
+    pass: MFA is phishing-resistant
+    fail: MFA is not phishing-resistant

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "e8check"
+version = "0.1.0"
+description = "Lab-only ACSC Essential Eight maturity checker: scores a synthetic host evidence pack (0–3 per strategy; overall = minimum)."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Nathan Hay" }]
+keywords = ["essential-eight", "acsc", "ism", "lab-only", "defensive"]
+dependencies = ["PyYAML"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+e8check = "e8check.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

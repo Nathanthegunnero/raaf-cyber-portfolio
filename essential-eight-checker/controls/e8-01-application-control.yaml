@@ -1,0 +1,67 @@
+id: E8-01
+strategy: Application control
+description: >
+  Looks for evidence that application control is present on the host.
+  ML1 is a basic enablement (audit or enforce). ML2 requires enforce mode
+  and blocking of unsigned code. ML3 additionally requires drivers and
+  scripts to be in scope. This checker does not describe how to bypass
+  application control.
+ism: Protect
+evidence_section: application_control
+maturity_rules:
+  1:
+    all:
+      - field: application_control.enabled
+        equals: true
+        reason: Application control is enabled
+  2:
+    all:
+      - field: application_control.enabled
+        equals: true
+      - field: application_control.mode
+        equals: enforce
+      - field: application_control.unsigned_blocked
+        equals: true
+  3:
+    all:
+      - field: application_control.enabled
+        equals: true
+      - field: application_control.mode
+        equals: enforce
+      - field: application_control.unsigned_blocked
+        equals: true
+      - field: application_control.drivers_controlled
+        equals: true
+      - field: application_control.scripts_controlled
+        equals: true
+findings:
+  - id: enabled
+    field: application_control.enabled
+    equals: true
+    maturity: 1
+    pass: Application control is enabled
+    fail: Application control is not enabled
+  - id: mode
+    field: application_control.mode
+    equals: enforce
+    maturity: 2
+    pass: Application control is in enforce mode
+    fail: Application control is not in enforce mode (audit or unset)
+  - id: unsigned
+    field: application_control.unsigned_blocked
+    equals: true
+    maturity: 2
+    pass: Unsigned code is blocked
+    fail: Unsigned code is not blocked
+  - id: drivers
+    field: application_control.drivers_controlled
+    equals: true
+    maturity: 3
+    pass: Drivers are in the application-control scope
+    fail: Drivers are not in the application-control scope
+  - id: scripts
+    field: application_control.scripts_controlled
+    equals: true
+    maturity: 3
+    pass: Scripts are in the application-control scope
+    fail: Scripts are not in the application-control scope

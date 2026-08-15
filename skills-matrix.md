@@ -5,7 +5,7 @@
 | Skill Category                  | Specific Skills & Tools                                      | Demonstrated / Planned In                          | Direct Relevance to RAAF Cyber Warfare Officer Role                  | Current Level      |
 |--------------------------------|--------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------------------------|--------------------|
 | **Network Defence & Hardening** | pfSense/OPNsense firewall, VLAN segmentation, iptables, defence-in-depth, zero-trust design | Cybersecurity Home Lab Design                      | Protecting ADF networks and information systems from intrusion      | Advanced (Building)|
-| **Vulnerability Management**   | Nmap, OpenVAS/Nessus, Burp Suite, OWASP ZAP, exploitation understanding, risk rating (CVSS) | Pentest + Essential Eight Remediation              | Identifying and mitigating threats to Defence systems               | Advanced           |
+| **Vulnerability Management**   | Nmap, OpenVAS/Nessus, Burp Suite, OWASP ZAP, exploitation understanding, risk rating (CVSS), Essential Eight Checker (synthetic host evidence → maturity 0–3) | Pentest + Essential Eight Remediation + [Essential Eight Checker](essential-eight-checker/) | Identifying and mitigating threats to Defence systems               | Advanced           |
 | **Threat Detection & SIEM**    | Wazuh/ELK/Splunk, log ingestion, custom detection rules, dashboards, MITRE ATT&CK mapping, Detection Engineering Toolkit | SIEM Implementation & [Detection Engineering Toolkit](detection-engineering-toolkit/) | Real-time monitoring and proactive defence of Air Force networks    | Intermediate-Advanced |
 | **Incident Response & Forensics** | Autopsy, Volatility, FTK Imager, timeline reconstruction, evidence handling, reporting | Digital Forensics & IR Simulation                  | Rapid incident containment and investigation in operational environments | Intermediate-Advanced |
 | **Modern Cryptography & PQC**  | Kyber/ML-KEM, Dilithium/ML-DSA (via liboqs-python), hybrid classical+PQC schemes, performance benchmarking | Post-Quantum Cryptography Demo (Artemis)           | Long-term protection of sensitive ADF communications against quantum threats | Advanced (Ongoing) |
@@ -17,6 +17,7 @@
 **Notes**: 
 - Every project explicitly maps to at least 3–4 rows above.
 - The Detection Engineering Toolkit is runnable code (YAML rules over synthetic logs), not a report-only artefact.
+- The Essential Eight Checker is runnable code (YAML controls over synthetic host evidence), not a report-only artefact.
 - All skills developed with real tools in isolated environments (no production systems).
 
 This matrix is designed to be copied into resumes or shown during Officer Selection Board discussions.
@@ -50,14 +51,14 @@ My portfolio is deliberately built to demonstrate readiness in exactly these are
 
 | Strategy                              | Key Purpose                                      | Portfolio Evidence                              |
 |---------------------------------------|--------------------------------------------------|-------------------------------------------------|
-| 1. Application Control                | Only approved software runs                      | Home Lab + Secure App hardening + DET-006       |
-| 2. Patch Applications                 | Timely app updates                               | Pentest remediation reports                     |
-| 3. Patch Operating Systems            | Timely OS updates                                | Home Lab hardening checklist                    |
-| 4. Restrict Administrative Privileges | Least privilege enforcement                      | AD domain + DET-002 / DET-003                   |
-| 5. Configure Microsoft Office Macros  | Block internet macros                            | Policy & configuration sections                 |
-| 6. User Application Hardening         | Disable risky features (Flash, Java, ads)        | Hardening checklists + DET-004 / DET-008        |
-| 7. Multi-factor Authentication        | Strong authentication                            | Secure App + DET-001 / DET-005                  |
-| 8. Regular Backups                    | Tested, frequent backups                         | Recovery & IR planning + DET-007 (log retention)|
+| 1. Application Control                | Only approved software runs                      | Home Lab + Secure App hardening + DET-006 + E8 Checker       |
+| 2. Patch Applications                 | Timely app updates                               | Pentest remediation reports + E8 Checker                     |
+| 3. Patch Operating Systems            | Timely OS updates                                | Home Lab hardening checklist + E8 Checker                    |
+| 4. Restrict Administrative Privileges | Least privilege enforcement                      | AD domain + DET-002 / DET-003 + E8 Checker                   |
+| 5. Configure Microsoft Office Macros  | Block internet macros                            | Policy & configuration sections + E8 Checker                 |
+| 6. User Application Hardening         | Disable risky features (Flash, Java, ads)        | Hardening checklists + DET-004 / DET-008 + E8 Checker        |
+| 7. Multi-factor Authentication        | Strong authentication                            | Secure App + DET-001 / DET-005 + E8 Checker                  |
+| 8. Regular Backups                    | Tested, frequent backups                         | Recovery & IR planning + DET-007 (log retention) + E8 Checker|
 
 ## Information Security Manual (ISM) Alignment
 The ISM provides the broader framework used by Defence. My portfolio touches all six functions:

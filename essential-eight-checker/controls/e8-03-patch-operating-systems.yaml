@@ -1,0 +1,65 @@
+id: E8-03
+strategy: Patch operating systems
+description: >
+  Looks for evidence that the operating system is current, automatic
+  updates are on, and the last patch is within a lab-model window
+  (14 / 7 / 2 days for ML1 / ML2 / ML3). This is a simplified lab model,
+  not the official ASD operating-system patching timetable.
+ism: Protect
+evidence_section: patch_os
+maturity_rules:
+  1:
+    all:
+      - field: patch_os.os_current
+        equals: true
+      - field: patch_os.auto_update
+        equals: true
+      - field: patch_os.days_since_last_patch
+        lte: 14
+  2:
+    all:
+      - field: patch_os.os_current
+        equals: true
+      - field: patch_os.auto_update
+        equals: true
+      - field: patch_os.days_since_last_patch
+        lte: 7
+  3:
+    all:
+      - field: patch_os.os_current
+        equals: true
+      - field: patch_os.auto_update
+        equals: true
+      - field: patch_os.days_since_last_patch
+        lte: 2
+findings:
+  - id: current
+    field: patch_os.os_current
+    equals: true
+    maturity: 1
+    pass: Operating system is current
+    fail: Operating system is not current
+  - id: auto
+    field: patch_os.auto_update
+    equals: true
+    maturity: 1
+    pass: Automatic OS updates are enabled
+    fail: Automatic OS updates are not enabled
+  - id: days_ml1
+    field: patch_os.days_since_last_patch
+    lte: 14
+    maturity: 1
+    pass: Last OS patch is within 14 days
+    fail: Last OS patch is older than 14 days
+  - id: days_ml2
+    field: patch_os.days_since_last_patch
+    lte: 7
+    maturity: 2
+    pass: Last OS patch is within 7 days
+    fail: Last OS patch is older than 7 days (ML2)
+  - id: days_ml3
+    field: patch_os.days_since_last_patch
+    lte: 2
+    maturity: 3
+    pass: Last OS patch is within 2 days
+    fail: Last OS patch is older than 2 days (ML3)
