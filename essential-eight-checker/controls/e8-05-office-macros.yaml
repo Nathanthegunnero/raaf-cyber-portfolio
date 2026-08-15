@@ -1,0 +1,47 @@
+id: E8-05
+strategy: Configure Microsoft Office macro settings
+description: >
+  Looks for evidence that Microsoft Office macros from the internet are
+  blocked (ML1), that unsigned macros are blocked (ML2), and that trusted
+  locations are locked so users cannot add their own (ML3). This checker
+  does not describe how to smuggle or execute macros.
+ism: Protect
+evidence_section: office_macros
+maturity_rules:
+  1:
+    all:
+      - field: office_macros.internet_macros_blocked
+        equals: true
+  2:
+    all:
+      - field: office_macros.internet_macros_blocked
+        equals: true
+      - field: office_macros.unsigned_macros_blocked
+        equals: true
+  3:
+    all:
+      - field: office_macros.internet_macros_blocked
+        equals: true
+      - field: office_macros.unsigned_macros_blocked
+        equals: true
+      - field: office_macros.trusted_locations_locked
+        equals: true
+findings:
+  - id: internet
+    field: office_macros.internet_macros_blocked
+    equals: true
+    maturity: 1
+    pass: Macros from the internet are blocked
+    fail: Macros from the internet are not blocked
+  - id: unsigned
+    field: office_macros.unsigned_macros_blocked
+    equals: true
+    maturity: 2
+    pass: Unsigned macros are blocked
+    fail: Unsigned macros are not blocked
+  - id: trusted
+    field: office_macros.trusted_locations_locked
+    equals: true
+    maturity: 3
+    pass: Trusted locations are locked
+    fail: Trusted locations are not locked

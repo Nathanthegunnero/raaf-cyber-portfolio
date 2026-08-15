@@ -1,0 +1,59 @@
+id: E8-08
+strategy: Regular backups
+description: >
+  Looks for evidence that backups exist on a regular cycle (ML1, at most
+  weekly in this lab model), that a copy is offline or immutable (ML2),
+  and that a restore has been tested (ML3). This checker does not describe
+  how to destroy or encrypt backups.
+ism: Protect
+evidence_section: backups
+maturity_rules:
+  1:
+    all:
+      - field: backups.enabled
+        equals: true
+      - field: backups.frequency_days
+        lte: 7
+  2:
+    all:
+      - field: backups.enabled
+        equals: true
+      - field: backups.frequency_days
+        lte: 7
+      - field: backups.offline_or_immutable
+        equals: true
+  3:
+    all:
+      - field: backups.enabled
+        equals: true
+      - field: backups.frequency_days
+        lte: 7
+      - field: backups.offline_or_immutable
+        equals: true
+      - field: backups.tested_restore
+        equals: true
+findings:
+  - id: enabled
+    field: backups.enabled
+    equals: true
+    maturity: 1
+    pass: Backups are enabled
+    fail: Backups are not enabled
+  - id: frequency
+    field: backups.frequency_days
+    lte: 7
+    maturity: 1
+    pass: Backup frequency is at least weekly
+    fail: Backup frequency is less often than weekly
+  - id: offline
+    field: backups.offline_or_immutable
+    equals: true
+    maturity: 2
+    pass: An offline or immutable backup copy exists
+    fail: No offline or immutable backup copy is recorded
+  - id: restore
+    field: backups.tested_restore
+    equals: true
+    maturity: 3
+    pass: A restore has been tested
+    fail: A restore has not been tested

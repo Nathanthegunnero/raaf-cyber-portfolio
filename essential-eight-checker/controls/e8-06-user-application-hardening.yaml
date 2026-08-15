@@ -1,0 +1,72 @@
+id: E8-06
+strategy: User application hardening
+description: >
+  Looks for evidence that user applications have unnecessary features
+  turned off. ML1 requires ads blocked plus Java and Flash disabled.
+  ML2 adds web-browser hardening. ML3 additionally requires Office OLE
+  packager/activation to be disabled. This checker does not describe
+  how to exploit those features.
+ism: Protect
+evidence_section: app_hardening
+maturity_rules:
+  1:
+    all:
+      - field: app_hardening.ads_blocked
+        equals: true
+      - field: app_hardening.java_disabled
+        equals: true
+      - field: app_hardening.flash_disabled
+        equals: true
+  2:
+    all:
+      - field: app_hardening.ads_blocked
+        equals: true
+      - field: app_hardening.java_disabled
+        equals: true
+      - field: app_hardening.flash_disabled
+        equals: true
+      - field: app_hardening.web_browser_hardening
+        equals: true
+  3:
+    all:
+      - field: app_hardening.ads_blocked
+        equals: true
+      - field: app_hardening.java_disabled
+        equals: true
+      - field: app_hardening.flash_disabled
+        equals: true
+      - field: app_hardening.web_browser_hardening
+        equals: true
+      - field: app_hardening.office_ole_disabled
+        equals: true
+findings:
+  - id: ads
+    field: app_hardening.ads_blocked
+    equals: true
+    maturity: 1
+    pass: Browser ads are blocked
+    fail: Browser ads are not blocked
+  - id: java
+    field: app_hardening.java_disabled
+    equals: true
+    maturity: 1
+    pass: Java in the browser is disabled
+    fail: Java in the browser is not disabled
+  - id: flash
+    field: app_hardening.flash_disabled
+    equals: true
+    maturity: 1
+    pass: Flash is disabled
+    fail: Flash is not disabled
+  - id: browser
+    field: app_hardening.web_browser_hardening
+    equals: true
+    maturity: 2
+    pass: Web browser hardening is applied
+    fail: Web browser hardening is not applied
+  - id: ole
+    field: app_hardening.office_ole_disabled
+    equals: true
+    maturity: 3
+    pass: Office OLE is disabled
+    fail: Office OLE is not disabled
