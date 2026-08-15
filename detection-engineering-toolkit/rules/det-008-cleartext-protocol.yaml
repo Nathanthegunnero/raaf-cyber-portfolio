@@ -1,0 +1,29 @@
+id: DET-008
+title: Cleartext protocol from a workstation
+description: >
+  A workstation opened an outbound FTP (21) or Telnet (23) session. Cleartext
+  protocols expose credentials and file contents on the wire and conflict with
+  Essential Eight user-application hardening.
+severity: medium
+log_source: Firewall
+mitre:
+  tactic: Credential Access
+  technique_id: T1040
+  technique: Network Sniffing
+essential_eight: User Application Hardening — disable insecure cleartext client protocols
+ism: Detect
+condition:
+  all:
+    - field: action
+      equals: outbound
+    - field: asset_role
+      equals: workstation
+  any:
+    - field: dest_port
+      equals: 21
+    - field: dest_port
+      equals: 23
+    - field: protocol
+      equals: ftp
+    - field: protocol
+      equals: telnet

@@ -1,0 +1,25 @@
+id: DET-001
+title: Failed logon burst
+description: >
+  Multiple failed interactive or network logons for the same account on the same
+  host inside a short window. This is evidence of credential stuffing or password
+  spraying already visible in the Security log — the rule does not describe how
+  to perform those activities.
+severity: high
+log_source: Security
+mitre:
+  tactic: Credential Access
+  technique_id: T1110
+  technique: Brute Force
+essential_eight: Multi-factor Authentication — MFA contains password-only stuffing against exposed accounts
+ism: Detect
+condition:
+  all:
+    - field: action
+      equals: failed_logon
+  threshold:
+    count: 5
+    window_seconds: 300
+    group_by:
+      - user
+      - host

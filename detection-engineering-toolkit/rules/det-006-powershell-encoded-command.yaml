@@ -1,0 +1,20 @@
+id: DET-006
+title: PowerShell encoded-command log evidence
+description: >
+  Process-creation or PowerShell operational log showing the well-known
+  -EncodedCommand / -enc switch on the command line. The rule matches the field
+  as logged. It does not encode, decode, or recommend command content.
+severity: high
+log_source: Microsoft-Windows-PowerShell/Operational
+mitre:
+  tactic: Execution
+  technique_id: T1059.001
+  technique: "Command and Scripting Interpreter: PowerShell"
+essential_eight: Application Control — encoded interpreter flags are a high-signal application-control gap
+ism: Detect
+condition:
+  any:
+    - field: command_line
+      regex: '(?i)(^|[\s/])-enc(odedcommand)?(\s|$|:)'
+    - field: command_line
+      contains: "-EncodedCommand"
