@@ -1,12 +1,12 @@
 # Skills Matrix • Information Warfare Officer
 
-**Nathan** | Updated 9 July 2026 | All projects conducted ethically in isolated lab environments
+**Nathan** | Updated 15 August 2026 | All projects conducted ethically in isolated lab environments
 
 | Skill Category                  | Specific Skills & Tools                                      | Demonstrated / Planned In                          | Direct Relevance to RAAF Cyber Warfare Officer Role                  | Current Level      |
 |--------------------------------|--------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------------------------|--------------------|
 | **Network Defence & Hardening** | pfSense/OPNsense firewall, VLAN segmentation, iptables, defence-in-depth, zero-trust design | Cybersecurity Home Lab Design                      | Protecting ADF networks and information systems from intrusion      | Advanced (Building)|
 | **Vulnerability Management**   | Nmap, OpenVAS/Nessus, Burp Suite, OWASP ZAP, exploitation understanding, risk rating (CVSS) | Pentest + Essential Eight Remediation              | Identifying and mitigating threats to Defence systems               | Advanced           |
-| **Threat Detection & SIEM**    | Wazuh/ELK/Splunk, log ingestion, custom detection rules, dashboards, MITRE ATT&CK mapping | SIEM Implementation & Threat Hunting               | Real-time monitoring and proactive defence of Air Force networks    | Intermediate-Advanced |
+| **Threat Detection & SIEM**    | Wazuh/ELK/Splunk, log ingestion, custom detection rules, dashboards, MITRE ATT&CK mapping, Detection Engineering Toolkit | SIEM Implementation & [Detection Engineering Toolkit](detection-engineering-toolkit/) | Real-time monitoring and proactive defence of Air Force networks    | Intermediate-Advanced |
 | **Incident Response & Forensics** | Autopsy, Volatility, FTK Imager, timeline reconstruction, evidence handling, reporting | Digital Forensics & IR Simulation                  | Rapid incident containment and investigation in operational environments | Intermediate-Advanced |
 | **Modern Cryptography & PQC**  | Kyber/ML-KEM, Dilithium/ML-DSA (via liboqs-python), hybrid classical+PQC schemes, performance benchmarking | Post-Quantum Cryptography Demo (Artemis)           | Long-term protection of sensitive ADF communications against quantum threats | Advanced (Ongoing) |
 | **Secure Application Development** | Flask/FastAPI secure coding, input validation, auth (incl. MFA simulation), OWASP Top 10 mitigation | Secure Web Application Project                     | Reducing attack surface on any Defence-facing applications          | Intermediate       |
@@ -16,7 +16,7 @@
 
 **Notes**: 
 - Every project explicitly maps to at least 3–4 rows above.
-- Proficiency will be raised to "Demonstrated with Artefacts" within 7–14 days as labs are built and screenshots/configs added.
+- The Detection Engineering Toolkit is runnable code (YAML rules over synthetic logs), not a report-only artefact.
 - All skills developed with real tools in isolated environments (no production systems).
 
 This matrix is designed to be copied into resumes or shown during Officer Selection Board discussions.
@@ -25,7 +25,7 @@ This matrix is designed to be copied into resumes or shown during Officer Select
 
 # Detailed Alignment with RAAF Cyber Warfare Officer Role & Australian Defence Frameworks
 
-**Author**: Nathan • Date: 9 July 2026 • Portfolio Hub: raaf-cyber-portfolio
+**Author**: Nathan • Date: 15 August 2026 • Portfolio Hub: raaf-cyber-portfolio
 
 ## Official Role Description (Direct Quote)
 From ADF Careers: “Be at the heart of the Air Force’s emerging cyberspace warfare capability, **leading a team of technical experts responsible for protecting our networks, data and information systems**.”
@@ -44,27 +44,27 @@ My portfolio is deliberately built to demonstrate readiness in exactly these are
    - Essential Eight remediations, secure coding practices, and post-quantum cryptography work address data confidentiality and system integrity.
 
 4. **Defensive Cyberspace Operations**  
-   - SIEM + threat hunting, penetration testing + remediation, and forensics projects cover detection, response, and recovery.
+   - SIEM + threat hunting, the Detection Engineering Toolkit, penetration testing + remediation, and forensics projects cover detection, response, and recovery.
 
 ## ASD Essential Eight Mastery (Full List with Portfolio Mapping)
 
 | Strategy                              | Key Purpose                                      | Portfolio Evidence                              |
 |---------------------------------------|--------------------------------------------------|-------------------------------------------------|
-| 1. Application Control                | Only approved software runs                      | Home Lab + Secure App hardening                 |
+| 1. Application Control                | Only approved software runs                      | Home Lab + Secure App hardening + DET-006       |
 | 2. Patch Applications                 | Timely app updates                               | Pentest remediation reports                     |
 | 3. Patch Operating Systems            | Timely OS updates                                | Home Lab hardening checklist                    |
-| 4. Restrict Administrative Privileges | Least privilege enforcement                      | AD domain + privilege mapping in reports        |
+| 4. Restrict Administrative Privileges | Least privilege enforcement                      | AD domain + DET-002 / DET-003                   |
 | 5. Configure Microsoft Office Macros  | Block internet macros                            | Policy & configuration sections                 |
-| 6. User Application Hardening         | Disable risky features (Flash, Java, ads)        | Hardening checklists in all projects            |
-| 7. Multi-factor Authentication        | Strong authentication                            | Secure App + auth simulation                    |
-| 8. Regular Backups                    | Tested, frequent backups                         | Recovery & IR planning sections                 |
+| 6. User Application Hardening         | Disable risky features (Flash, Java, ads)        | Hardening checklists + DET-004 / DET-008        |
+| 7. Multi-factor Authentication        | Strong authentication                            | Secure App + DET-001 / DET-005                  |
+| 8. Regular Backups                    | Tested, frequent backups                         | Recovery & IR planning + DET-007 (log retention)|
 
 ## Information Security Manual (ISM) Alignment
 The ISM provides the broader framework used by Defence. My portfolio touches all six functions:
 - **Govern** – Clear project planning and documentation standards
 - **Identify** – Vulnerability scanning and risk assessment
 - **Protect** – Hardening, patching, access controls
-- **Detect** – SIEM monitoring and alerting
+- **Detect** – SIEM monitoring, alerting, and the Detection Engineering Toolkit
 - **Respond** – Forensics and incident playbooks
 - **Recover** – Backup and restoration considerations
 
@@ -83,8 +83,3 @@ This portfolio is not theoretical — it is a living demonstration of my commitm
 - Defence University Sponsorship details
 
 I welcome any opportunity to discuss or demonstrate these projects.
-
-
-Would you like me to generate the next project repo (e.g. `home-lab-design` with its own full README + diagram + Essential Eight mapping table) right now, or any adjustments to these two files first?
-
-You now have a genuinely strong, extensive central portfolio that looks like it was built by someone very serious about the role. Great work starting this tonight!

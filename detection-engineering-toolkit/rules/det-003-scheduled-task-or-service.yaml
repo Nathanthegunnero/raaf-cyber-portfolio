@@ -1,0 +1,24 @@
+id: DET-003
+title: Scheduled task or service creation
+description: >
+  Windows logged creation of a scheduled task (event 4698) or installation of a
+  service (event 7045). Persistence evidence already present in Security/System
+  channels — used here only to exercise defensive matching.
+severity: medium
+log_source: Security
+mitre:
+  tactic: Persistence
+  technique_id: T1053.005
+  technique: "Scheduled Task/Job: Scheduled Task"
+essential_eight: Restrict Administrative Privileges — task and service creation is an admin-equivalent change
+ism: Detect
+condition:
+  any:
+    - field: event_id
+      equals: "4698"
+    - field: event_id
+      equals: "7045"
+    - field: action
+      equals: scheduled_task_created
+    - field: action
+      equals: service_installed

@@ -1,0 +1,26 @@
+id: DET-002
+title: New local administrator assignment
+description: >
+  A security-enabled local Administrators group membership change, or assignment
+  of elevated privileges, recorded in the Windows Security log. Maps to least
+  privilege monitoring (Essential Eight — Restrict Administrative Privileges).
+severity: high
+log_source: Security
+mitre:
+  tactic: Persistence
+  technique_id: T1098
+  technique: Account Manipulation
+essential_eight: Restrict Administrative Privileges — alert on unexpected local admin grants
+ism: Detect
+condition:
+  any:
+    - field: event_id
+      equals: "4732"
+    - field: event_id
+      equals: "4728"
+    - field: event_id
+      equals: "4672"
+    - field: action
+      equals: privilege_assigned
+    - field: message
+      contains: added to a security-enabled local group

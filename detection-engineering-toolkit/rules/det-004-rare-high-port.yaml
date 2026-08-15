@@ -1,0 +1,22 @@
+id: DET-004
+title: Outbound connection to a high / non-standard port
+description: >
+  A workstation initiated an outbound connection whose destination port is in the
+  dynamic/private range (>= 49152). Unusual egress ports are a common command-and
+  control signal (ATT&CK T1571) and should be reviewed against approved baselines.
+severity: medium
+log_source: Firewall
+mitre:
+  tactic: Command and Control
+  technique_id: T1571
+  technique: Non-Standard Port
+essential_eight: User Application Hardening — constrain unexpected application egress
+ism: Detect
+condition:
+  all:
+    - field: action
+      equals: outbound
+    - field: asset_role
+      equals: workstation
+    - field: dest_port
+      gte: 49152

@@ -1,0 +1,25 @@
+id: DET-005
+title: MFA disabled or bypass recorded
+description: >
+  Identity-platform or local audit evidence that multi-factor authentication was
+  disabled, excluded, or bypassed for an account. Directly undermines Essential
+  Eight MFA. This rule matches the logged action; it does not describe how to
+  disable MFA.
+severity: critical
+log_source: AzureAD
+mitre:
+  tactic: Defense Evasion
+  technique_id: T1556.006
+  technique: "Modify Authentication Process: Multi-Factor Authentication"
+essential_eight: Multi-factor Authentication — treat MFA disable/bypass as a priority alert
+ism: Detect
+condition:
+  any:
+    - field: action
+      equals: mfa_disabled
+    - field: action
+      equals: mfa_bypass
+    - field: message
+      contains: multi-factor authentication disabled
+    - field: message
+      contains: MFA bypass

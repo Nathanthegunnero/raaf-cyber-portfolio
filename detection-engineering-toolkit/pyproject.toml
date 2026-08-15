@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deteng"
+version = "0.1.0"
+description = "Lab-only detection engineering toolkit: YAML rules over synthetic logs, mapped to MITRE ATT&CK and the ASD Essential Eight."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Nathan Hay" }]
+keywords = ["detection-engineering", "mitre-attack", "essential-eight", "lab-only"]
+dependencies = ["PyYAML"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+deteng = "deteng.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

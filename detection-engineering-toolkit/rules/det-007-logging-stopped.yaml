@@ -1,0 +1,27 @@
+id: DET-007
+title: Logging stopped or audit log cleared
+description: >
+  Evidence that the Windows Event Log service stopped (1100) or that the Security
+  audit log was cleared (1102), or an explicit logging_stopped action. Log gaps
+  destroy Detect/Respond evidence and must be treated as hostile until proven
+  otherwise.
+severity: critical
+log_source: Security
+mitre:
+  tactic: Defense Evasion
+  technique_id: T1070.001
+  technique: "Indicator Removal: Clear Windows Event Logs"
+essential_eight: Regular Backups — clearing logs destroys investigative and recovery evidence
+ism: Detect
+condition:
+  any:
+    - field: event_id
+      equals: "1102"
+    - field: event_id
+      equals: "1100"
+    - field: action
+      equals: logging_stopped
+    - field: action
+      equals: audit_log_cleared
+    - field: message
+      contains: The audit log was cleared
