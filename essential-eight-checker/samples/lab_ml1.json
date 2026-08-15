@@ -1,0 +1,55 @@
+{
+  "synthetic": true,
+  "label": "SYNTHETIC LAB HOST \u2014 not a real workstation",
+  "host": "WS-LAB-E8-01",
+  "os": "Windows 11",
+  "collected_at": "2026-08-15T02:00:00Z",
+  "note": "Hand-written lab evidence intended to score about ML1 overall (minimum of the eight).",
+  "application_control": {
+    "enabled": true,
+    "mode": "audit",
+    "unsigned_blocked": false,
+    "drivers_controlled": false,
+    "scripts_controlled": false
+  },
+  "patch_applications": {
+    "office_current": true,
+    "browser_current": true,
+    "other_apps_current": false,
+    "critical_unpatched_days_max": 14
+  },
+  "patch_os": {
+    "os_current": true,
+    "days_since_last_patch": 10,
+    "auto_update": true
+  },
+  "admin_privileges": {
+    "local_admin_count": 2,
+    "admin_mfa": false,
+    "separate_admin_accounts": true,
+    "priv_use_logged": true
+  },
+  "office_macros": {
+    "internet_macros_blocked": true,
+    "unsigned_macros_blocked": false,
+    "trusted_locations_locked": false
+  },
+  "app_hardening": {
+    "ads_blocked": true,
+    "java_disabled": true,
+    "flash_disabled": true,
+    "office_ole_disabled": false,
+    "web_browser_hardening": true
+  },
+  "mfa": {
+    "enabled_for_remote": true,
+    "enabled_for_admins": false,
+    "phishing_resistant": false
+  },
+  "backups": {
+    "enabled": true,
+    "offline_or_immutable": false,
+    "tested_restore": false,
+    "frequency_days": 7
+  }
+}
