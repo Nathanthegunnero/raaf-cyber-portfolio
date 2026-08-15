@@ -38,7 +38,7 @@ All work is conducted ethically in isolated lab environments. Documentation foll
 | Skill Category              | Specific Competencies & Tools                          | Portfolio Evidence                     | Direct Relevance to RAAF CWO Role                  |
 |-----------------------------|--------------------------------------------------------|----------------------------------------|----------------------------------------------------|
 | Network Defence             | pfSense/OPNsense, VLAN segmentation, firewall rules    | Home Lab Design                        | Protecting ADF networks and information systems   |
-| Vulnerability Management    | Nmap, Burp Suite, OWASP ZAP, remediation               | Pentest + Essential Eight Report       | Reducing attack surface on Defence systems         |
+| Vulnerability Management    | Nmap, Burp Suite, OWASP ZAP, remediation, Essential Eight Checker (synthetic host evidence → maturity 0–3) | Pentest + Essential Eight Report + [Essential Eight Checker](essential-eight-checker/) | Reducing attack surface on Defence systems         |
 | Threat Detection & SIEM     | Wazuh/ELK, log analysis, custom alerts, MITRE ATT&CK, Detection Engineering Toolkit | SIEM Implementation + [Detection Engineering Toolkit](detection-engineering-toolkit/) | Proactive threat detection & situational awareness |
 | Incident Response & Forensics | Autopsy, Volatility, timeline reconstruction          | Forensics Simulation                   | Incident handling and investigation                |
 | Modern & Quantum Cryptography | Kyber, Dilithium (liboqs), hybrid schemes              | PQC / Artemis Demo                     | Long-term protection against quantum threats       |
@@ -71,6 +71,7 @@ Every project in this portfolio includes explicit mapping tables showing how the
 5. **Post-Quantum Cryptography Demo (Artemis)** – Hybrid crypto implementations & defence implications
 6. **Secure Web Application Development** – End-to-end secure coding
 7. **Detection Engineering Toolkit** – runnable Python rules engine: synthetic logs → YAML detections → MITRE ATT&CK + Essential Eight mapping. See [`detection-engineering-toolkit/`](detection-engineering-toolkit/)
+8. **Essential Eight Checker** – runnable Python auditor: synthetic host evidence → per-strategy maturity 0–3 → overall (minimum) score. See [`essential-eight-checker/`](essential-eight-checker/)
 
 **Status note**: Comprehensive architecture designs, specifications, skills matrices, and sample reports are complete and in this repo. Hands-on implementation, screenshots, configs, and test artefacts are being added daily with dated build logs.
 
