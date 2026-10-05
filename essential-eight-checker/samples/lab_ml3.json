@@ -1,0 +1,55 @@
+{
+  "synthetic": true,
+  "label": "SYNTHETIC LAB HOST — not a real workstation",
+  "host": "WS-LAB-E8-ML3",
+  "os": "Windows 11",
+  "collected_at": "2026-10-06T00:00:00Z",
+  "note": "Hand-written lab evidence intended to score ML3 overall (all eight strategies meet ML3 checks in this simplified model).",
+  "application_control": {
+    "enabled": true,
+    "mode": "enforce",
+    "unsigned_blocked": true,
+    "drivers_controlled": true,
+    "scripts_controlled": true
+  },
+  "patch_applications": {
+    "office_current": true,
+    "browser_current": true,
+    "other_apps_current": true,
+    "critical_unpatched_days_max": 2
+  },
+  "patch_os": {
+    "os_current": true,
+    "days_since_last_patch": 1,
+    "auto_update": true
+  },
+  "admin_privileges": {
+    "local_admin_count": 1,
+    "admin_mfa": true,
+    "separate_admin_accounts": true,
+    "priv_use_logged": true
+  },
+  "office_macros": {
+    "internet_macros_blocked": true,
+    "unsigned_macros_blocked": true,
+    "trusted_locations_locked": true
+  },
+  "app_hardening": {
+    "ads_blocked": true,
+    "java_disabled": true,
+    "flash_disabled": true,
+    "office_ole_disabled": true,
+    "web_browser_hardening": true
+  },
+  "mfa": {
+    "enabled_for_remote": true,
+    "enabled_for_admins": true,
+    "phishing_resistant": true
+  },
+  "backups": {
+    "enabled": true,
+    "offline_or_immutable": true,
+    "tested_restore": true,
+    "frequency_days": 1
+  }
+}
