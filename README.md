@@ -41,7 +41,7 @@ All work is conducted ethically in isolated lab environments. Documentation foll
 | Vulnerability Management    | Nmap, Burp Suite, OWASP ZAP, remediation, Essential Eight Checker (synthetic host evidence → maturity 0–3) | Pentest + Essential Eight Report + [Essential Eight Checker](essential-eight-checker/) | Reducing attack surface on Defence systems         |
 | Threat Detection & SIEM     | Wazuh/ELK, log analysis, custom alerts, MITRE ATT&CK, Detection Engineering Toolkit | SIEM Implementation + [Detection Engineering Toolkit](detection-engineering-toolkit/) | Proactive threat detection & situational awareness |
 | Incident Response & Forensics | Autopsy, Volatility, timeline reconstruction          | Forensics Simulation                   | Incident handling and investigation                |
-| Modern & Quantum Cryptography | Kyber, Dilithium (liboqs), hybrid schemes              | PQC / Artemis Demo                     | Long-term protection against quantum threats       |
+| Modern & Quantum Cryptography | Kyber/ML-KEM, Dilithium/ML-DSA (liboqs), hybrid schemes, HKDF+AES-GCM | [PQC / Artemis Demo](pqc-artemis-demo/) | Long-term protection against quantum threats       |
 | Secure Development          | Input sanitisation, auth, OWASP Top 10                 | Secure Web App Project                 | Hardening defence applications                     |
 | Documentation & Leadership  | Professional reports, diagrams, executive summaries    | All projects                           | Officer-level reporting, briefing & team leadership |
 
@@ -68,7 +68,7 @@ Every project in this portfolio includes explicit mapping tables showing how the
 2. **Penetration Testing & Essential Eight Remediation** – Full technical report with findings and controls
 3. **SIEM Deployment & Threat Hunting** – Wazuh implementation + detection rules
 4. **Digital Forensics & Incident Response** – Analysis of simulated incidents
-5. **Post-Quantum Cryptography Demo (Artemis)** – Hybrid crypto implementations & defence implications
+5. **Post-Quantum Cryptography Demo (Artemis)** – runnable Python CLI: hybrid X25519+ML-KEM / Ed25519+ML-DSA, HKDF+AES-GCM. See [`pqc-artemis-demo/`](pqc-artemis-demo/)
 6. **Secure Web Application Development** – End-to-end secure coding
 7. **Detection Engineering Toolkit** – runnable Python rules engine: synthetic logs → YAML detections → MITRE ATT&CK + Essential Eight mapping. See [`detection-engineering-toolkit/`](detection-engineering-toolkit/)
 8. **Essential Eight Checker** – runnable Python auditor: synthetic host evidence → per-strategy maturity 0–3 → overall (minimum) score. See [`essential-eight-checker/`](essential-eight-checker/)
@@ -92,5 +92,5 @@ Every project in this portfolio includes explicit mapping tables showing how the
 
 **All work is original, ethical, and for educational/professional development.**
 
-Last updated: 15 August 2026  
+Last updated: 6 October 2026  
 Perth, WA • Open to feedback from ADF mentors

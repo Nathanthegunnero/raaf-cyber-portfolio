@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "artemis"
+version = "0.1.0"
+description = "Lab-only post-quantum cryptography demo: hybrid X25519+ML-KEM and Ed25519+ML-DSA with HKDF/AES-GCM."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Nathan Hay" }]
+keywords = ["pqc", "ml-kem", "ml-dsa", "hybrid", "lab-only", "educational"]
+dependencies = ["cryptography>=42"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+pqc = ["liboqs-python>=0.12"]
+
+[project.scripts]
+artemis = "artemis.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
