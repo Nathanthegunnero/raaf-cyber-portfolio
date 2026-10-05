@@ -2,9 +2,9 @@
 
 Lab-only Python auditor: **synthetic host evidence → per-strategy maturity 0–3 → overall score (minimum of the eight)**.
 
-Personal educational project by Nathan (Perth, WA) for Information Warfare Officer preparation. It demonstrates how a defender scores a host evidence pack against the public ACSC Essential Eight — not how to attack a network. **Not official RAAF, ADF, or ASD material. No Defence branding.**
+Personal educational project by Nathan (Perth, WA) for Information Warfare Officer preparation. It demonstrates how a defender scores a host evidence pack against the public ASD Essential Eight — not how to attack a network. **Not official RAAF, ADF, or ASD material. No Defence branding.**
 
-This is a **simplified lab model**. It does not replace an ASD Essential Eight assessment.
+This is a **simplified lab model**. It does not replace an ASD Essential Eight assessment. Control YAML here is inspired by the public [Essential Eight Maturity Model](https://www.cyber.gov.au/business-government/asds-cyber-security-frameworks/essential-eight/essential-eight-maturity-model) (November 2023) but is **not** a verbatim extract of Appendices A–C.
 
 ---
 
@@ -13,10 +13,11 @@ This is a **simplified lab model**. It does not replace an ASD Essential Eight a
 Python 3.11+ and PyYAML. From this directory:
 
 ```bash
-python3 -m pip install -e .
+python3 -m pip install -e ".[dev]"
 python3 -m e8check list-controls
 python3 -m e8check run --evidence samples/lab_ml1.json
 python3 -m e8check run --evidence samples/lab_gaps.json
+python3 -m e8check run --evidence samples/lab_ml3.json
 python3 -m e8check report --evidence samples/lab_ml1.json --out ./out
 ```
 
@@ -33,11 +34,13 @@ PYTHONPATH=src python3 -m e8check run --evidence samples/lab_ml1.json
 | `e8check list-controls` | Print every loaded control id (E8-01 … E8-08) |
 | `e8check report` | Same as `run`, but always writes `e8-report.json` and `e8-report.md` (default `./out`) |
 
-Flags: `--evidence PATH` (default `samples/lab_ml1.json`), `--controls DIR` (default `controls/`), `--target N` (gap threshold, default `1`).
+Flags: `--evidence PATH` (default `samples/lab_ml1.json`), `--controls DIR` (default `controls/`), `--target N` (gap threshold, default `1`), `--allow-non-synthetic` (opt-in; lab packs must set `synthetic: true`).
 
 ```bash
 python3 -m pytest -q
 ```
+
+CI: GitHub Actions runs pytest (and sample smoke commands) on Python 3.11–3.13 when this folder changes.
 
 ---
 
@@ -64,20 +67,31 @@ E8-07   Multi-factor authentication                 1    Protect  MFA is not ena
 E8-08   Regular backups                             1    Protect  No offline or immutable backup copy is recorded
 ```
 
-`samples/lab_gaps.json` is a synthetic host with obvious gaps and should print **Overall maturity: ML0**.
+`samples/lab_gaps.json` should print **Overall maturity: ML0**.  
+`samples/lab_ml3.json` should print **Overall maturity: ML3** (in this simplified model).
 
 ---
 
-## Scoring
+## Scoring (lab model vs ASD wording)
 
-- Each strategy is scored **0, 1, 2, or 3**.
-- **Overall maturity = the minimum of the eight.** That is the ACSC-style roll-up: you are only as mature as your weakest strategy.
+**ASD Essential Eight Maturity Model (public summary):**
+
+- Four levels: **Maturity Level Zero** through **Maturity Level Three**.
+- ML1–ML3 mitigate increasing levels of **tradecraft and targeting** (commodity → more selective → more adaptive). ML0 means ML1 requirements are not met / significant posture weaknesses.
+- Strategies are designed to **complement each other**. ASD guidance is to achieve the **same maturity level across all eight** before moving to a higher level.
+- This checker’s **overall = minimum of the eight** is the simple roll-up that matches that “weakest strategy wins” idea for a lab teachable moment.
+
+**In this checker specifically:**
+
+- Each strategy is scored **0, 1, 2, or 3** against local YAML rules (not Appendices A–C verbatim).
+- **Overall maturity = the minimum of the eight.**
 - Gaps are strategies below `--target` (default 1).
-- If a required evidence field is missing, that strategy is **ML0** and the finding says `insufficient evidence`.
+- Missing required evidence → **ML0** with `insufficient evidence`.
+- Packs must set `"synthetic": true` unless `--allow-non-synthetic` is passed.
 
 ### What ML1 / ML2 / ML3 mean *in this checker*
 
-Honest lab model inspired by public ACSC intent. **Not** a verbatim ISM extract and **not** an official ASD assessor.
+Honest lab model inspired by public ASD intent. **Not** a verbatim ISM / E8MM extract and **not** an official ASD assessor.
 
 | ID | Strategy | ML1 (basic) | ML2 (tightened) | ML3 (stronger) |
 |----|----------|-------------|-----------------|----------------|
@@ -92,6 +106,8 @@ Honest lab model inspired by public ACSC intent. **Not** a verbatim ISM extract 
 
 ML0 = control absent, failing, or insufficient evidence.
 
+Official strategy names and maturity appendices: [cyber.gov.au — Essential Eight maturity model](https://www.cyber.gov.au/business-government/asds-cyber-security-frameworks/essential-eight/essential-eight-maturity-model).
+
 ---
 
 ## Evidence pack schema
@@ -104,53 +120,14 @@ A JSON object the checker evaluates. Keep packs **synthetic** and labelled.
   "host": "WS-LAB-E8-01",
   "os": "Windows 11",
   "collected_at": "2026-08-15T02:00:00Z",
-  "application_control": {
-    "enabled": true,
-    "mode": "audit",
-    "unsigned_blocked": false,
-    "drivers_controlled": false,
-    "scripts_controlled": false
-  },
-  "patch_applications": {
-    "office_current": true,
-    "browser_current": true,
-    "other_apps_current": false,
-    "critical_unpatched_days_max": 14
-  },
-  "patch_os": {
-    "os_current": true,
-    "days_since_last_patch": 10,
-    "auto_update": true
-  },
-  "admin_privileges": {
-    "local_admin_count": 2,
-    "admin_mfa": false,
-    "separate_admin_accounts": true,
-    "priv_use_logged": true
-  },
-  "office_macros": {
-    "internet_macros_blocked": true,
-    "unsigned_macros_blocked": false,
-    "trusted_locations_locked": false
-  },
-  "app_hardening": {
-    "ads_blocked": true,
-    "java_disabled": true,
-    "flash_disabled": true,
-    "office_ole_disabled": false,
-    "web_browser_hardening": true
-  },
-  "mfa": {
-    "enabled_for_remote": true,
-    "enabled_for_admins": false,
-    "phishing_resistant": false
-  },
-  "backups": {
-    "enabled": true,
-    "offline_or_immutable": false,
-    "tested_restore": false,
-    "frequency_days": 7
-  }
+  "application_control": { "enabled": true, "mode": "audit", "unsigned_blocked": false, "drivers_controlled": false, "scripts_controlled": false },
+  "patch_applications": { "office_current": true, "browser_current": true, "other_apps_current": false, "critical_unpatched_days_max": 14 },
+  "patch_os": { "os_current": true, "days_since_last_patch": 10, "auto_update": true },
+  "admin_privileges": { "local_admin_count": 2, "admin_mfa": false, "separate_admin_accounts": true, "priv_use_logged": true },
+  "office_macros": { "internet_macros_blocked": true, "unsigned_macros_blocked": false, "trusted_locations_locked": false },
+  "app_hardening": { "ads_blocked": true, "java_disabled": true, "flash_disabled": true, "office_ole_disabled": false, "web_browser_hardening": true },
+  "mfa": { "enabled_for_remote": true, "enabled_for_admins": false, "phishing_resistant": false },
+  "backups": { "enabled": true, "offline_or_immutable": false, "tested_restore": false, "frequency_days": 7 }
 }
 ```
 
