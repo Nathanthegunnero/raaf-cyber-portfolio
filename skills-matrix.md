@@ -1,6 +1,6 @@
 # Skills Matrix • Information Warfare Officer
 
-**Nathan** | Updated 15 August 2026 | All projects conducted ethically in isolated lab environments
+**Nathan** | Updated 6 October 2026 | All projects conducted ethically in isolated lab environments
 
 | Skill Category                  | Specific Skills & Tools                                      | Demonstrated / Planned In                          | Direct Relevance to RAAF Cyber Warfare Officer Role                  | Current Level      |
 |--------------------------------|--------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------------------------|--------------------|
@@ -8,7 +8,7 @@
 | **Vulnerability Management**   | Nmap, OpenVAS/Nessus, Burp Suite, OWASP ZAP, exploitation understanding, risk rating (CVSS), Essential Eight Checker (synthetic host evidence → maturity 0–3) | Pentest + Essential Eight Remediation + [Essential Eight Checker](essential-eight-checker/) | Identifying and mitigating threats to Defence systems               | Advanced           |
 | **Threat Detection & SIEM**    | Wazuh/ELK/Splunk, log ingestion, custom detection rules, dashboards, MITRE ATT&CK mapping, Detection Engineering Toolkit | SIEM Implementation & [Detection Engineering Toolkit](detection-engineering-toolkit/) | Real-time monitoring and proactive defence of Air Force networks    | Intermediate-Advanced |
 | **Incident Response & Forensics** | Autopsy, Volatility, FTK Imager, timeline reconstruction, evidence handling, reporting | Digital Forensics & IR Simulation                  | Rapid incident containment and investigation in operational environments | Intermediate-Advanced |
-| **Modern Cryptography & PQC**  | Kyber/ML-KEM, Dilithium/ML-DSA (via liboqs-python), hybrid classical+PQC schemes, performance benchmarking | Post-Quantum Cryptography Demo (Artemis)           | Long-term protection of sensitive ADF communications against quantum threats | Advanced (Ongoing) |
+| **Modern Cryptography & PQC**  | Kyber/ML-KEM, Dilithium/ML-DSA (via liboqs-python), hybrid classical+PQC schemes, HKDF+AES-GCM session demo | [Post-Quantum Cryptography Demo (Artemis)](pqc-artemis-demo/) | Long-term protection of sensitive ADF communications against quantum threats | Advanced (Ongoing) |
 | **Secure Application Development** | Flask/FastAPI secure coding, input validation, auth (incl. MFA simulation), OWASP Top 10 mitigation | Secure Web Application Project                     | Reducing attack surface on any Defence-facing applications          | Intermediate       |
 | **Australian Frameworks Mastery** | ASD Essential Eight full mapping, ISM principles (Govern-Identify-Protect-Detect-Respond-Recover), compliance documentation | All projects                                       | Direct compliance with Defence cyber standards                      | Advanced           |
 | **Technical Documentation & Leadership** | Professional reports (exec summary + findings + recommendations), Mermaid/draw.io diagrams, version control, project planning | Entire Portfolio + Build Logs                      | Officer-level briefing, reporting, and team leadership capability   | Advanced           |
@@ -18,6 +18,7 @@
 - Every project explicitly maps to at least 3–4 rows above.
 - The Detection Engineering Toolkit is runnable code (YAML rules over synthetic logs), not a report-only artefact.
 - The Essential Eight Checker is runnable code (YAML controls over synthetic host evidence), not a report-only artefact.
+- The Artemis PQC demo is runnable code (hybrid KEX/signatures + AEAD), not a report-only artefact.
 - All skills developed with real tools in isolated environments (no production systems).
 
 This matrix is designed to be copied into resumes or shown during Officer Selection Board discussions.
