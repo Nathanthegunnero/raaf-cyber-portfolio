@@ -87,3 +87,64 @@ def test_missing_section_is_ml0_insufficient_evidence():
     assert result.maturity == 0
     assert result.insufficient_evidence is True
     assert "insufficient evidence" in result.notes
+
+
+def test_lab_ml3_overall_three():
+    controls = load_controls(CONTROLS_DIR)
+    pack = load_evidence(ROOT / "samples" / "lab_ml3.json")
+    assessment = assess(controls, pack, target=3)
+    assert assessment.overall == 3
+    assert assessment.gap_count == 0
+    assert all(item.maturity == 3 for item in assessment.results)
+
+
+def test_reject_non_synthetic_by_default(tmp_path):
+    from e8check.loader import LoadError
+
+    path = tmp_path / "realish.json"
+    path.write_text(
+        '{"synthetic": false, "host": "X", "os": "Y", "mfa": {"enabled_for_remote": true}}',
+        encoding="utf-8",
+    )
+    try:
+        load_evidence(path)
+        raise AssertionError("expected LoadError")
+    except LoadError as exc:
+        assert "synthetic" in str(exc).lower()
+
+
+def test_allow_non_synthetic_when_requested(tmp_path):
+    path = tmp_path / "realish.json"
+    path.write_text(
+        '{"synthetic": false, "host": "X", "os": "Y"}',
+        encoding="utf-8",
+    )
+    pack = load_evidence(path, require_synthetic=False)
+    assert pack.synthetic is False
+
+
+def test_reject_non_object_evidence_section(tmp_path):
+    from e8check.loader import LoadError
+
+    path = tmp_path / "bad_section.json"
+    path.write_text(
+        '{"synthetic": true, "host": "X", "os": "Y", "mfa": "not-an-object"}',
+        encoding="utf-8",
+    )
+    try:
+        load_evidence(path)
+        raise AssertionError("expected LoadError")
+    except LoadError as exc:
+        assert "mfa" in str(exc)
+
+
+def test_missing_synthetic_field_rejected(tmp_path):
+    from e8check.loader import LoadError
+
+    path = tmp_path / "no_flag.json"
+    path.write_text('{"host": "X", "os": "Y"}', encoding="utf-8")
+    try:
+        load_evidence(path)
+        raise AssertionError("expected LoadError")
+    except LoadError as exc:
+        assert "synthetic" in str(exc).lower()

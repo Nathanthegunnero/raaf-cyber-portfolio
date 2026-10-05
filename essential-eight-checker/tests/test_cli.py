@@ -107,3 +107,57 @@ def test_run_missing_evidence_exits_2(tmp_path, capsys):
     assert rc == 2
     err = capsys.readouterr().err
     assert "not found" in err
+
+
+def test_run_lab_ml3_overall_ml3(capsys):
+    lab_ml3 = ROOT / "samples" / "lab_ml3.json"
+    rc = main(
+        [
+            "run",
+            "--evidence",
+            str(lab_ml3),
+            "--controls",
+            str(CONTROLS_DIR),
+        ]
+    )
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "Overall maturity:  ML3" in out
+    assert "WS-LAB-E8-ML3" in out
+
+
+def test_invalid_target_exits_2(capsys):
+    rc = main(
+        [
+            "run",
+            "--evidence",
+            str(LAB_ML1),
+            "--controls",
+            str(CONTROLS_DIR),
+            "--target",
+            "9",
+        ]
+    )
+    assert rc == 2
+    err = capsys.readouterr().err
+    assert "target" in err.lower()
+
+
+def test_reject_non_synthetic_pack(tmp_path, capsys):
+    path = tmp_path / "not_synth.json"
+    path.write_text(
+        '{"synthetic": false, "host": "X", "os": "Y", "mfa": {}}',
+        encoding="utf-8",
+    )
+    rc = main(
+        [
+            "run",
+            "--evidence",
+            str(path),
+            "--controls",
+            str(CONTROLS_DIR),
+        ]
+    )
+    assert rc == 2
+    err = capsys.readouterr().err
+    assert "synthetic" in err.lower()

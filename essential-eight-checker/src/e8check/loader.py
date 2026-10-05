@@ -165,10 +165,47 @@ def load_controls(controls_dir: str | Path) -> list[Control]:
         seen.add(control.id)
         controls.append(control)
     controls.sort(key=lambda item: item.id)
+    if len(controls) != 8:
+        raise LoadError(
+            f"expected exactly 8 Essential Eight controls, found {len(controls)} in {path}"
+        )
+    strategies = {item.strategy for item in controls}
+    if strategies != set(STRATEGIES):
+        missing = sorted(set(STRATEGIES) - strategies)
+        extra = sorted(strategies - set(STRATEGIES))
+        raise LoadError(
+            f"controls must cover all eight strategies; missing={missing} extra={extra}"
+        )
     return controls
 
 
-def load_evidence(evidence_path: str | Path) -> EvidencePack:
+def _validate_evidence_shape(raw: dict[str, Any], source: str) -> None:
+    """Reject obviously broken packs early (type checks, not ASD assessment)."""
+    if "synthetic" not in raw:
+        raise LoadError(
+            f"{source}: missing required boolean field 'synthetic' "
+            "(lab packs must set synthetic: true)"
+        )
+    if not isinstance(raw["synthetic"], bool):
+        raise LoadError(f"{source}: 'synthetic' must be a JSON boolean, not {type(raw['synthetic']).__name__}")
+    for key in ("host", "os"):
+        if key in raw and raw[key] is not None and not isinstance(raw[key], str):
+            raise LoadError(f"{source}: '{key}' must be a string when present")
+    for section in (
+        "application_control",
+        "patch_applications",
+        "patch_os",
+        "admin_privileges",
+        "office_macros",
+        "app_hardening",
+        "mfa",
+        "backups",
+    ):
+        if section in raw and raw[section] is not None and not isinstance(raw[section], dict):
+            raise LoadError(f"{source}: '{section}' must be a JSON object when present")
+
+
+def load_evidence(evidence_path: str | Path, *, require_synthetic: bool = True) -> EvidencePack:
     path = Path(evidence_path)
     if not path.is_file():
         raise LoadError(f"evidence file not found: {path}")
@@ -178,8 +215,15 @@ def load_evidence(evidence_path: str | Path) -> EvidencePack:
         raise LoadError(f"{path}: invalid JSON ({exc})") from exc
     if not isinstance(raw, dict):
         raise LoadError(f"{path}: evidence root must be a JSON object")
+    _validate_evidence_shape(raw, str(path))
+    synthetic = bool(raw["synthetic"])
+    if require_synthetic and not synthetic:
+        raise LoadError(
+            f"{path}: synthetic must be true for this lab-only tool "
+            "(pass --allow-non-synthetic only for deliberate experiments)"
+        )
     return EvidencePack(
-        synthetic=bool(raw.get("synthetic", False)),
+        synthetic=synthetic,
         host=str(raw.get("host") or "UNKNOWN"),
         os=str(raw.get("os") or "UNKNOWN"),
         collected_at=str(raw.get("collected_at") or ""),
