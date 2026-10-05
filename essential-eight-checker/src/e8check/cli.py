@@ -34,6 +34,11 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--controls", type=Path, default=DEFAULT_CONTROLS, help="Directory of YAML controls")
     run.add_argument("--out", type=Path, default=None, help="If set, write e8-report.json and e8-report.md")
     run.add_argument("--target", type=int, default=DEFAULT_TARGET, help="Gap threshold (default: 1)")
+    run.add_argument(
+        "--allow-non-synthetic",
+        action="store_true",
+        help="Allow packs with synthetic:false (lab default rejects them)",
+    )
 
     listed = sub.add_parser("list-controls", help="List loaded Essential Eight control IDs")
     listed.add_argument("--controls", type=Path, default=DEFAULT_CONTROLS, help="Directory of YAML controls")
@@ -43,6 +48,11 @@ def _parser() -> argparse.ArgumentParser:
     report.add_argument("--controls", type=Path, default=DEFAULT_CONTROLS, help="Directory of YAML controls")
     report.add_argument("--out", type=Path, default=DEFAULT_OUT, help="Output directory (default: ./out)")
     report.add_argument("--target", type=int, default=DEFAULT_TARGET, help="Gap threshold (default: 1)")
+    report.add_argument(
+        "--allow-non-synthetic",
+        action="store_true",
+        help="Allow packs with synthetic:false (lab default rejects them)",
+    )
     return parser
 
 
@@ -57,12 +67,24 @@ def _print_controls(controls_dir: Path) -> int:
     return 0
 
 
-def _run(evidence: Path, controls_dir: Path, out: Path | None, target: int) -> int:
+def _run(
+    evidence: Path,
+    controls_dir: Path,
+    out: Path | None,
+    target: int,
+    *,
+    allow_non_synthetic: bool = False,
+) -> int:
     if target not in (0, 1, 2, 3):
         print("error: --target must be 0, 1, 2, or 3", file=sys.stderr)
         return 2
     controls = load_controls(controls_dir)
-    pack = load_evidence(evidence)
+    pack = load_evidence(evidence, require_synthetic=not allow_non_synthetic)
+    if not pack.synthetic:
+        print(
+            "warning: evidence pack is not marked synthetic — lab-only tool",
+            file=sys.stderr,
+        )
     assessment = assess(controls, pack, target=target)
     report = build_report(assessment)
     print(format_console(report), end="")
@@ -80,9 +102,21 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "list-controls":
             return _print_controls(args.controls)
         if args.command == "run":
-            return _run(args.evidence, args.controls, args.out, args.target)
+            return _run(
+                args.evidence,
+                args.controls,
+                args.out,
+                args.target,
+                allow_non_synthetic=args.allow_non_synthetic,
+            )
         if args.command == "report":
-            return _run(args.evidence, args.controls, args.out, args.target)
+            return _run(
+                args.evidence,
+                args.controls,
+                args.out,
+                args.target,
+                allow_non_synthetic=args.allow_non_synthetic,
+            )
     except LoadError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
