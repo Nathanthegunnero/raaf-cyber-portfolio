@@ -13,3 +13,16 @@ Shipped on this date:
 
 Not official RAAF, ADF, or ASD material. No production evidence. No secrets.
 Overall maturity is the minimum of the eight strategies.
+
+## 6 October 2026 — polish pass
+
+Mentor-style polish (lab-only, still synthetic):
+
+- README: clearer ASD Essential Eight Maturity Model wording (ML0–ML3 / tradecraft; same maturity across all eight; overall = minimum), public cyber.gov.au link, explicit “not Appendices A–C”
+- Input validation: require `synthetic: true` (opt-out via `--allow-non-synthetic`); reject non-object evidence sections; require all eight strategies when loading controls
+- Sample pack `lab_ml3.json` for an ML3 overall path in this simplified model
+- GitHub Actions workflow running pytest + sample smoke on Python 3.11–3.13
+- Extra edge-case tests (validation, ML3 sample, bad target, non-synthetic rejection)
+- Version 0.1.1
+
+Still not official RAAF/ADF/ASD material.
